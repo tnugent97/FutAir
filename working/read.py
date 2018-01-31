@@ -7,5 +7,7 @@ sensor = tcs34725.TCS34725(i2c)
 sensor.active(True)
 time.sleep_ms(500)
 while True:
-    print(sensor.read())
+    # print(sensor.read())
+    raw_data = sensor.read(True)
+    print(tcs34725.html_rgb(raw_data))
     time.sleep_ms(20)

@@ -154,13 +154,13 @@ class TCS34725:
         self.i2c.writeto(self.address, b'\xe6')
 
 
-    def html_rgb(data):
-        r, g, b, c = data
-        red = pow((int((r/c) * 256) / 255), 2.5) * 255
-        green = pow((int((g/c) * 256) / 255), 2.5) * 255
-        blue = pow((int((b/c) * 256) / 255), 2.5) * 255
-        return red, green, blue
+def html_rgb(data):
+    r, g, b, c = data
+    red = pow((int((r/c) * 256) / 255), 2.5) * 255
+    green = pow((int((g/c) * 256) / 255), 2.5) * 255
+    blue = pow((int((b/c) * 256) / 255), 2.5) * 255
+    return red, green, blue
 
-    def html_hex(data):
-        r, g, b = html_rgb(data)
-        return "{0:02x}{1:02x}{2:02x}".format(int(r),int(g),int(b))
+def html_hex(data):
+    r, g, b = html_rgb(data)
+    return "{0:02x}{1:02x}{2:02x}".format(int(r),int(g),int(b))
