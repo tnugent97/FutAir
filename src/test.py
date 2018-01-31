@@ -14,13 +14,16 @@ REG_BDATA    = const(0x1a)
 i2cport = I2C(scl=Pin(5), sda=Pin(4), freq=100000)
 
 # Active the sensor
-def activate_sensor():
-  i2cport.writeto_mem(ADDRESS,REG_ACTIVATE,bytearray([0x1]))
-  sleep(0.003)
-  i2cport.writeto_mem(ADDRESS,REG_ACTIVATE,bytearray([0x3]))
+
+i2cport.writeto_mem(ADDRESS,REG_ACTIVATE,bytearray([0x1]))
+sleep(0.003)
+i2cport.writeto_mem(ADDRESS,REG_ACTIVATE,bytearray([0x3]))
+
 
 # Read from sensor
-def test_colours(n=2):
-  r,g,b,c = tuple(int.from_bytes(i2cport.readfrom_mem(ADDRESS,reg,n),"big") for reg in (REG_RDATA,REG_GDATA,REG_BDATA,REG_CDATA))
-  red,green,blue = tuple(int(pow((int((colour/c) * 256) / 255), 2.5) * 255) for colour in (r,g,b))
-  print("Red: {0}, Green: {1}, Blue {2}".format(red,green,blue))
+n=2
+while(1):
+    r,g,b,c = tuple(int.from_bytes(i2cport.readfrom_mem(ADDRESS,reg,n),"big") for reg in (REG_RDATA,REG_GDATA,REG_BDATA,REG_CDATA))
+    red,green,blue = tuple(int(pow((int((colour/c) * 256) / 255), 2.5) * 255) for colour in (r,g,b))
+    sleep(0.5)
+    print(red,green,blue)
