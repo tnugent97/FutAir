@@ -10,15 +10,13 @@ REG_RDATA    = const(0x16)
 REG_GDATA    = const(0x18)
 REG_BDATA    = const(0x1a)
 
-# Set up I2C thingy
+# Set up I2C
 i2cport = I2C(scl=Pin(5), sda=Pin(4), freq=100000)
 
-# Active the sensor
-
+# Activate sensor
 i2cport.writeto_mem(ADDRESS,REG_ACTIVATE,bytearray([0x1]))
 sleep(0.003)
 i2cport.writeto_mem(ADDRESS,REG_ACTIVATE,bytearray([0x3]))
-
 
 # Read from sensor
 n=2
@@ -27,3 +25,4 @@ while(1):
     red,green,blue = tuple(int(pow((int((colour/c) * 256) / 255), 2.5) * 255) for colour in (r,g,b))
     sleep(0.5)
     print(red,green,blue)
+    sleep(0.5)
