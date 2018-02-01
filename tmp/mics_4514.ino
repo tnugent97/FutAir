@@ -24,7 +24,7 @@ int sensor_ReadMics4514(void)
   unsigned long calib;
   float fVolt, fRes, fConc;
 
-  /**  
+  /**
    * Read CO sensor
    */
   reading = analogRead(ANALOG_CO);
@@ -43,11 +43,11 @@ int sensor_ReadMics4514(void)
     fConc = (0.7 - fRes) / 0.01;
   else
     fConc = (0.3233 - fRes) / 0.00058;
-    
+
   reading = fConc;
   Serial.println(reading);
-  
-  /**  
+
+  /**
    * Read NO2 sensor
    */
 
@@ -58,8 +58,8 @@ int sensor_ReadMics4514(void)
   fVolt /= 1024.0;
 
   // Get Rs/R0 value
-  calib = CALIB_R0_NO2; 
-  
+  calib = CALIB_R0_NO2;
+
   fRes = (5000.0/fVolt - 1000) / calib;
 
   // Convert to ppm
@@ -69,7 +69,7 @@ int sensor_ReadMics4514(void)
     fConc = (fRes - 0.5) / 0.25;
   else
     fConc = (fRes + 129.655) / 4.589;
-    
+
   reading = fConc;
 Serial.println(reading);
 }
@@ -83,6 +83,5 @@ Serial.println(reading);
 void loop()
 {
   sensor_ReadMics4514();
-  delay(5000); 
+  delay(5000);
 }
-
