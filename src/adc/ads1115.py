@@ -168,4 +168,4 @@ class ADS1015(ADS1115):
         return super().alert_start(rate, channel1, channel2, threshold << 4)
 
     def alert_read(self):
-return super().alert_read() >> 4
+        return super().alert_read() >> 4
