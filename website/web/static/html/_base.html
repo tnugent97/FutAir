@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+<head>
+
+  {% include "shared/html/_head.html" with context %}
+  <!--
+   import "_forms.html" as f 
+   import '_common_helpers.html' as ch 
+ -->
+  {% block head %}
+
+  {% endblock head %}
+</head>
+
+<body id="page-top">
+  {% block nav %}
+  {# child pages should set active_page to the name of the page or root section #}
+  {% set active_page = active_page|default('Home') %}
+  {% include "shared/html/_navbar.html" with context %}
+  {% endblock %}
+  
+  {% block pageheader %}
+  {% endblock pageheader %}
+  
+  {% block fullPage %}
+        
+    {%- block content -%}
+
+    {%- endblock content -%}
+
+  {% endblock fullPage %}
+
+</body>
+
+{% block footer %}
+{% include "shared/html/_footer.html" %}
+{% endblock footer %}
+</html>
