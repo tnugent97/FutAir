@@ -1,7 +1,7 @@
 from machine import I2C
 from machine import Pin
 import time
-import adc1115
+import ads1115
 
 PIN_HEATING_NO2 = 19
 
