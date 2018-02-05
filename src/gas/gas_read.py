@@ -12,6 +12,8 @@ time.sleep_ms(10000)
 sensor.preHeaterOFF()
 
 while True:
-    print("CO: ", sensor.read_RED())
-    print("NO: ", sensor.read_OX())
+    # print("CO: ", sensor.read_RED())
+    # print("NO: ", sensor.read_OX())
+    print("CO: ", sensor.volt_RED())
+    print("NO: ", sensor.volt_OX())
     time.sleep_ms(1000)

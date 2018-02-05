@@ -27,6 +27,16 @@ class MICS4514:
     def preHeaterOFF(self):
         self.heating_pin.off()
 
+    def volt_RED(self):
+        value = self.adc.read(ADC_RATE, RED_SENSOR_CH)
+        volts = (value * 3.3) / 65536
+        return volts
+
+    def volt_OX(self):
+        value = self.adc.read(ADC_RATE, OX_SENSOR_CH)
+        volts = (value * 3.3) / 65536
+        return volts
+
     def read_RED(self):
         print("read RED")
         value = self.adc.read(ADC_RATE, RED_SENSOR_CH)
