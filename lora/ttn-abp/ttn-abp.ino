@@ -19,15 +19,15 @@ Application session key
 // LoRaWAN NwkSKey, network session key
 // This is the default Semtech key, which is used by the early prototype TTN
 // network.
-static const PROGMEM u1_t NWKSKEY[16] = { 0x2B, 0x7E, 0x15, 0x16, 0x28, 0xAE, 0xD2, 0xA6, 0xAB, 0xF7, 0x15, 0x88, 0x09, 0xCF, 0x4F, 0x3C };
+static const PROGMEM u1_t NWKSKEY[16] = { 0x83, 0xEA, 0x1E, 0x35, 0xCC, 0x9A, 0x3B, 0xB7, 0x8C, 0x7A, 0x47, 0x29, 0x39, 0xDC, 0x9F, 0x0E };
 
 // LoRaWAN AppSKey, application session key
 // This is the default Semtech key, which is used by the early prototype TTN
 // network.
-static const u1_t PROGMEM APPSKEY[16] = { 0x2B, 0x7E, 0x15, 0x16, 0x28, 0xAE, 0xD2, 0xA6, 0xAB, 0xF7, 0x15, 0x88, 0x09, 0xCF, 0x4F, 0x3C };
+static const u1_t PROGMEM APPSKEY[16] = { 0x74, 0xE3, 0xF0, 0xBF, 0x30, 0x62, 0x23, 0x3A, 0x38, 0xC0, 0x7F, 0xBF, 0x8A, 0xDE, 0xA3, 0x70 };
 
 // LoRaWAN end-device address (DevAddr)
-static const u4_t DEVADDR = 0x03FF0001 ; // <-- Change this address for every node!
+static const u4_t DEVADDR = 0xD4439A1C; // <-- Change this address for every node!
 
 // These callbacks are only used in over-the-air activation, so they are
 // left empty here (we cannot leave them out completely unless
@@ -143,6 +143,7 @@ void setup() {
     os_init();
     // Reset the MAC state. Session and pending data transfers will be discarded.
     LMIC_reset();
+    LMIC_setClockError(MAX_CLOCK_ERROR * 1 / 100);
 
     // Set static session parameters. Instead of dynamically establishing a session
     // by joining the network, precomputed session parameters are be provided.
