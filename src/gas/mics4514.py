@@ -3,10 +3,10 @@ from machine import Pin
 import time
 import ads1115
 
-PIN_HEATING_NO2 = 19
+PIN_HEATING_NO2 = 12
 
-RED_SENSOR_CH = 0 #CO, Ammonia, H2S, Ethanol, Hydrogen...
-OX_SENSOR_CH = 1 #NO2, NO, Hydrogen
+RED_SENSOR_CH = 1 #CO, Ammonia, H2S, Ethanol, Hydrogen...
+OX_SENSOR_CH = 2 #NO2, NO, Hydrogen
 ADC_RATE = 4
 
 CALIB_R0_NO2 = 2200    #R0 calibration value for the NO2 sensor
@@ -16,7 +16,7 @@ class MICS4514:
 
     def __init__(self, i2c):
         self.i2c = i2c
-        self.adc = adc1115.ADS1115(i2c)
+        self.adc = ads1115.ADS1115(i2c)
         self.heating_pin = Pin(PIN_HEATING_NO2, Pin.OUT)
         self.red_val = 0
         self.ox_val = 0
@@ -28,11 +28,12 @@ class MICS4514:
         self.heating_pin.off()
 
     def read_RED(self):
+        print("read RED")
         value = self.adc.read(ADC_RATE, RED_SENSOR_CH)
         volts = (value * 3.3) / 65536
         fRes = (5000 / volts - 1000) / CALIB_R0_CO #get Rs / R0 value
 
-        #convert to ppm
+        #convert to ppm"
         if fRes > 0.7:
             fRes = 0.7
         if fRes > 0.6:
@@ -45,6 +46,7 @@ class MICS4514:
         return fConc
 
     def read_OX(self):
+        print("read OX")
         value = self.adc.read(ADC_RATE, RED_SENSOR_CH)
         volts = (value * 3.3) / 65536
         fRes = (5000 / volts - 1000) / CALIB_R0_NO2 #get Rs / R0 value
