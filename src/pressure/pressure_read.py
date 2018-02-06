@@ -10,5 +10,5 @@ sensor.oversample_sett = 2 #accuracy; 0-3, lower better, but slower
 time.sleep_ms(500)
 
 while True:
-    print(sensor.pressure()) #apparently gives same value if <10s interval between calls
+    print(sensor.pressure) #apparently gives same value if <10s interval between calls
     time.sleep_ms(20)
