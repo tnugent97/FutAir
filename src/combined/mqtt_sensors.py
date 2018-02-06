@@ -1,12 +1,19 @@
-from umqtt.simple import MQTTClient
 from machine import I2C
+gc.collect()
 from machine import Pin
+gc.collect()
 import time
+gc.collect()
 import network
+gc.collect()
 import machine
-import ads1115
+gc.collect()
 import mics4514
+gc.collect()
 import si7021
+gc.collect()
+import bmp180
+gc.collect()
 
 def th_sensor_setup(_scl, _sda):
     print("Temperature/Humidity Sensor Setup")
@@ -14,10 +21,11 @@ def th_sensor_setup(_scl, _sda):
     s = si7021.SI7021(i2c)
     return s
 
-def adc_sensor_setup(_scl, _sda, _freq):
-    print("Analogue to Digital Converter Sensor Setup")
+def pre_sensor_setup(_scl, _sda, _freq):
+    print("Pressure Sensor Setup")
     i2c = I2C(scl=Pin(_scl), sda=Pin(_sda), freq=_freq)
-    s = ads1115.ADS1115(i2c)
+    s = bmp180.BMP180(i2c)
+    s.oversample_sett = 2
     return s
 
 def gas_sensor_setup(_scl, _sda, _freq):
@@ -30,8 +38,8 @@ def gas_sensor_setup(_scl, _sda, _freq):
     s.preHeaterOFF()
     return s
 
-def adc_sensor_read(sensor):
-    val = sensor.read(4, 0)
+def pre_sensor_read(sensor):
+    val = sensor.pressure
     time.sleep_ms(20)
     return val
 
@@ -48,41 +56,22 @@ def gas_sensor_read(sensor):
     return no2, co
 
 
-adc = adc_sensor_setup(13, 12, 100000)
-# gas = gas_sensor_setup(7, 6, 100000)
+# adc = adc_sensor_setup(13, 12, 100000)
+gas = gas_sensor_setup(5, 4, 100000)
 th = th_sensor_setup(5, 4)
+pre = pre_sensor_setup(5, 4, 100000)
 
 time.sleep_ms(500)
 
 while True:
-    adc_val = adc_sensor_read(adc)
-    # gas_val = gas_sensor_read(gas)
+    # adc_val = adc_sensor_read(adc)
+    gas_val = gas_sensor_read(gas)
     th_val = th_sensor_read(th)
+    pre_val = pre_sensor_read(pre)
 
     print("Temp and Hum ", th_val)
-    # print("Gas ", gas_val,)
-    print("ADC ", adc_val)
+    print("Gas ", gas_val,)
+    print("Pressure", pre_val)
+    # print("ADC ", adc_val)
 
-# def main(server="192.168.0.10"):
-#     ap_if = network.WLAN(network.AP_IF)
-#     ap_if.active(False)
-
-#     sta_if = network.WLAN(network.STA_IF)
-#     sta_if.active(True)
-#     sta_if.connect('EEERover','exhibition')
-
-#     adc = adc_sensor_setup(5, 4, 100000)
-#     gas = gas_sensor_setup(7, 6, 100000)
-#     th = th_sensor_setup(9, 8, 100000)
-
-#     adc_val = adc_sensor_read(adc)
-#     gas_val = gas_sensor_read(gas)
-#     th_val = th_sensor_read(th)
-
-#     print(adc_val, gas_val, th_val)
-
-#     c = MQTTClient(machine.unique_id(), server)
-#     c.connect()
-#     c.publish(b"esys/Thom&Doug/test", bytes("hello", 'utf-8'))
-#     c.disconnect()
 
