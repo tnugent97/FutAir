@@ -6,6 +6,7 @@
 #include <hal/hal.h>
 #include <SPI.h>
 #include "dtostrf.h"
+#include <Adafruit_Si7021.h>
 
 /**
  * How often should data be sent?
@@ -59,6 +60,7 @@ lmic_pinmap pins = {
 
 // Track if the current message has finished sending
 bool dataSent = false;
+Adafruit_Si7021 sensor = Adafruit_Si7021();
 
 /**
  * DHT Humidity/Temperature sensor
@@ -195,7 +197,8 @@ void setup() {
 
     #if defined(STARTUP_MESSAGE)
         // Send Startup Message
-        sendStartupMessage();
+        //sendStartupMessage();
+        sendBattery();
         delay(1000);
     #endif
 
@@ -232,7 +235,6 @@ void loop() {
 
     // Debug message
     Serial.println("\nBeginning to send data");
-
     // Send Battery Voltage
     #if defined(SENSOR_FEATHER_BATTERY)
         sendBattery();
@@ -789,13 +791,16 @@ void sendBattery() {
     measuredvbat *= 2;    // we divided by 2, so multiply back
     measuredvbat *= 3.3;  // Multiply by 3.3V, our reference voltage
     measuredvbat /= 1024; // convert to voltage
-
+    float val = sensor.readTemperature();
     // Convert to a string
     char floatStr[10];
-    dtostrf(measuredvbat, 3, 2, floatStr);
+    // dtostrf(measuredvbat, 3, 2, floatStr);
+    dtostrf(val, 3, 2, floatStr);
+
 
     // Put together the data to send
-    char packet[20] = "Battery: ";
+    // char packet[20] = "Battery: ";
+    char packet[20] = "Temp: ";
     strcat(packet, floatStr);
 
     // Debug message
