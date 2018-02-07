@@ -1,4 +1,4 @@
-update=Wed 07 Feb 2018 15:59:42 GMT
+update=Wed 07 Feb 2018 16:10:53 GMT
 version=1
 last_client=kicad
 [pcbnew]
@@ -61,3 +61,4 @@ LibName29=valves
 LibName30=mic5225-3
 LibName31=si7021-a20
 LibName32=ads1115idgst
+LibName33=mics-4514
