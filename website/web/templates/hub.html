@@ -1,0 +1,119 @@
+{% set active_page = 'Hub' %}
+
+{% extends 'shared/html/_base.html' %}
+{% block head %}
+<style>
+#map {  
+  height: 800px;  
+  width: 100%;
+  padding-top: 300px;
+}
+</style>
+
+{% endblock head %}
+{% block nav %}
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-shrink" id="secondaryNav">
+  <div class="container">
+    <a class="navbar-brand js-scroll-trigger" href="{{url_for('landing.index')}}#page-top">Airhead</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav text-uppercase ml-auto">
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#services">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#team">Team</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#contact">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('landing.hub')}}">Data Hub</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{% endblock nav %}
+{% block pageheader %}
+
+{% endblock pageheader %}
+
+{% block fullPage %}
+
+<div id="map"></div>
+
+<script>
+  function prettyPrint(payload){
+    var sout = "";
+    for (var key in payload){
+      sout += `${key}: ${payload[key]}\n`
+    }
+    return sout
+  }
+  var airheads = JSON.parse('{{ data | tojson | safe}}');
+  function initMap() {
+      var imperial = {lat: 51.4988, lng: -0.1667};
+      
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: imperial
+      });
+      
+      for (var key in airheads) {
+          var airhead = airheads[key]
+          var marker = new google.maps.Marker({
+            position: {lat: airhead.location.lat, lng: airhead.location.lng},
+            map: map,
+            title: prettyPrint(airhead.payload)
+            //payload: airhead.payload
+          });
+        }
+      }
+
+  //function initMap() {
+  //  var imperial = new google.maps.LatLng(51.4988, -0.1667);
+  //  var map = new google.maps.Map(document.getElementById('map'), {
+  //    zoom: 12,
+  //    center: imperial
+  //  });
+  //  
+  //  }
+  //
+  //  for (var key in airheads) {
+  //    var airhead = airheads.key;
+  //    var pos = new google.maps.LatLng(airhead.location.lat, airhead.location.lon);
+  //    var marker = new google.maps.Marker({
+  //      position: {lat: airhead.location.lat, lng: airhead.location.lon},
+  //      map: map,
+  //      title: key,
+  //      payload: airhead.payload
+  //    });
+  //    
+  //}
+  // To add the marker to the map, call setMap();
+  //marker.setMap(map);
+  //var testmarker = new google.maps.Marker({
+  //  position: imperial,
+  //  map: map,
+  //  title: "Hello world",
+  //  payload: airhead.payload
+  //});
+  //testmarker.setMap(map);
+</script>
+
+
+{% endblock fullPage %}
+{% block footer %}
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfTv7tlnrnNkojoYyfWCwdLW0nJ0Wa7Gg&callback=initMap">
+</script>
+{% endblock footer %}
