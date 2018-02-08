@@ -1,4 +1,4 @@
-update=Wed 07 Feb 2018 16:34:22 GMT
+update=Thu 08 Feb 2018 13:00:04 GMT
 version=1
 last_client=kicad
 [pcbnew]
@@ -63,3 +63,5 @@ LibName31=mic5225-3
 LibName32=si7021-a20
 LibName33=ads1115idgst
 LibName34=mics-4514
+LibName35=atsamd21g18_qfn
+LibName36=rfm95
