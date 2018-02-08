@@ -1231,4 +1231,67 @@ D3_IRQ
 Text GLabel 6200 4800 2    51   Input ~ 0
 DIO3
 NoConn ~ 6200 4700
+$Comp
+L R R?
+U 1 1 5A7C8589
+P 2800 4550
+F 0 "R?" V 2880 4550 50  0000 C CNN
+F 1 "R" V 2800 4550 50  0000 C CNN
+F 2 "" V 2730 4550 50  0001 C CNN
+F 3 "" H 2800 4550 50  0001 C CNN
+	1    2800 4550
+	1    0    0    -1  
+$EndComp
+$Comp
+L LED D?
+U 1 1 5A7C85E4
+P 2800 5000
+F 0 "D?" H 2800 5100 50  0000 C CNN
+F 1 "LED" H 2800 4900 50  0000 C CNN
+F 2 "" H 2800 5000 50  0001 C CNN
+F 3 "" H 2800 5000 50  0001 C CNN
+	1    2800 5000
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	2800 4850 2800 4700
+$Comp
+L GND #PWR?
+U 1 1 5A7C8759
+P 2800 5350
+F 0 "#PWR?" H 2800 5100 50  0001 C CNN
+F 1 "GND" H 2800 5200 50  0000 C CNN
+F 2 "" H 2800 5350 50  0001 C CNN
+F 3 "" H 2800 5350 50  0001 C CNN
+	1    2800 5350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2800 5350 2800 5150
+Wire Wire Line
+	2800 4400 2800 4300
+Text GLabel 2800 4300 1    51   Input ~ 0
+D13
+Text GLabel 10100 4900 2    51   Input ~ 0
+D13
+Text GLabel 8600 5450 3    51   Input ~ 0
+D3_IRQ
+Text GLabel 8500 5450 3    51   Input ~ 0
+D4_RST
+Text GLabel 9200 5450 3    51   Input ~ 0
+SCK
+Text GLabel 9100 5450 3    51   Input ~ 0
+MOSI
+Text GLabel 9300 5450 3    51   Input ~ 0
+MISO
+Text GLabel 8000 4900 0    51   Input ~ 0
+D8_CS
+Text Notes 8140 7640 0    51   ~ 0
+2018
+Text Notes 10630 7630 0    51   ~ 0
+v1.0
+Text Notes 7350 7500 0    51   ~ 0
+Pollution Sensor with Cortex M0+ and RFM95\n
+Text Notes 10950 7490 0    51   ~ 0
+DAJB\n
 $EndSCHEMATC
