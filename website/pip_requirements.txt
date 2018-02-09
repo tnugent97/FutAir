@@ -1,7 +1,6 @@
 Flask
 Flask-DebugToolbar
 Flask-Login
-sqlite3
 Jinja2
 MarkupSafe
 Werkzeug
