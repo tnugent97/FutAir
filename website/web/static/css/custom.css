@@ -84,3 +84,83 @@
 .blue-bg {
   background-color: #1E4F77;
 }
+
+.text_green {
+  color: rgb(5, 128, 87);
+}
+
+.text_blue {
+  color: rgb(28, 89, 105);
+}
+/* Section Headers for different types */
+.section-header:after {
+  background: #eee;
+  text-align: center;
+}
+
+.section-header h2 {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+}
+
+.section-header p {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+}
+
+.section-header.v2:after {
+  background: #f6f8fa;
+  text-align: center;
+}
+
+.section-header.v2 p {
+  color: #4e575f;
+  text-align: center;
+}
+
+/* CSS for the capabilities section of the website */
+.capabilities {
+  padding: 117px 0; 
+}
+  
+  @media (max-width: 340px) {
+    .capabilities {
+      overflow: hidden; } }
+
+/* Each item */
+.capability {
+  margin-top: 60px; }
+  .capability:nth-child(1), .capability:nth-child(2), .capability:nth-child(3) {
+    margin-top: 35px; }
+  @media (max-width: 991px) {
+    .capability:nth-child(3) {
+      margin-top: 60px; } }
+  @media (max-width: 767px) {
+    .capability:nth-child(3) {
+      margin-top: 35px; } }
+  @media (max-width: 767px) {
+    .capability {
+      min-height: auto;
+      margin-top: 35px; } }
+  .capability .media .media-left {
+    padding: 0;
+    text-align: center; }
+    .capability .media .media-left span {
+      display: block;
+      width: 70px;
+      font-size: 36px; }
+  .capability .media .media-body h4 {
+    margin: 0 0 6px;
+    font: 600 20px/1 "Poppins", sans-serif; }
+  .capability .media .media-body p {
+    margin: 0;
+    font: 300 14px/22px "Poppins", sans-serif; }
+
+/* Font Awesome how section icons */
+.how_icon i {
+  font-size: 60px;
+  text-align: center;
+  color:rgb(5, 128, 87);
+}
