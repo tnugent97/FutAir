@@ -8,61 +8,48 @@
 <header class="masthead">
   <div class="container">
     <div class="intro-text">
-      <div class="intro-lead-in">A low cost, self powered air quality sensor for the future.</div>
       <div class="intro-heading text-uppercase">Pollusense</div>
-      <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services">Tell Me More</a>
+      <div class="intro-lead-in">A low cost, self powered air quality sensor for the future.</div>
     </div>
   </div>
 </header>
 
-
-<style type="text/css">
-.london-bg {
-    background-image: url('{{ url_for('static', filename='img/londonpollution.jpg') }}');
-    width: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-</style>
-
-<div class="london-bg">
-  <div class="container bgimg">
+<div class="">
+  <div class="container">
     <div class="row">
-      <div class="col-lg-12 text-center text-white">
-        <br><br><br><br>
+      <div class="col-lg-12 section-header">
         <p> More than 80% of people living in urban areas that monitor air pollution are exposed to 
           air quality levels that exceed the World Health Organisation limits. 
           Populations in low-income cities are the most impacted; 98% of cities in low- and middle 
-          income countries with more than 100,000 inhabitants do not meet WHO air quality guidelines. 
+          income countries with more than 100,000 inhabitants do not meet World Health Organisation air quality guidelines. 
           However, in high income countries, that percentage decreases to 56%. </p>
-          <br>
-        <p>For example, NO2 pollution, which is produced largely by diesel vehicles, causes 5,900 early deaths every year in London. Most air quality zones across the UK break legal limits and the crisis was called a “public health emergency” by MPs in April. Scientists said that one in 10 cases of Alzheimer’s in people living near busy roads could be linked to air pollution.  </p>
-        <br><br><br><br>      
+        <p>For example, NO2 pollution, which is produced largely by diesel vehicles, causes 5,900 early deaths every year in London. Most air quality zones across the UK break legal limits and the crisis was called a “public health emergency” by MPs in April. Scientists said that one in 10 cases of Alzheimer’s in people living near busy roads could be linked to air pollution.  </p> 
       </div>
     </div>
   </div>
 </div>
 
 
-<section id="solution">
+<section id="belief">
   <div class="container">
     <div class="row">
-        <div class="col-lg-12 text-center">
-          <h2>We believe that an important part of solving this problem is to have a cheap method of obtaining accurate and real time data on the extent of the crisis. Policy makers can devise and legislate new regulations more effectively if they have hard evidence for on the country-wide trends in air pollution. Law enforcement officials can then test the efficacy of these solutions by using a data driven approach to curbing emissions. <h2>
+        <div class="col-lg-12 section-header">
+          <h2>Our Philosphy</h2>
+          <p>We believe that an important part of solving this problem is to have a cheap method of obtaining accurate and real time data on the extent of the crisis. Policy makers can devise and legislate new regulations more effectively if they have hard evidence for on the country-wide trends in air pollution. Law enforcement officials can then test the efficacy of these solutions by using a data driven approach to curbing emissions. <p>
         </div>
       </div>
   </div>
 </section>
 
-<div>
+<!-- <div>
   <img class="img-responsive img-fluid center" src="{{ url_for('static', filename='img/proto1.jpg') }}"> </img>
-</div>
+</div> -->
 
 <section class="row how" id="setup">
   <div class="container">
     <div class="row section-header">
-      <h2 class="text_blue">What makes it tick?</h2>
-      <p class="text_green">How does the worlds more scalable and affordable air quality device actually work?</p>
+      <h2>What makes it tick?</h2>
+      <p>How does the worlds more scalable and affordable air quality device actually work?</p>
     </div>
     <div class="row how_icon">
       <!--==========Item==========-->
@@ -96,8 +83,8 @@
 <section class="row capabilities" id="measurements">
   <div class="container">
       <div class="row section-header">
-          <h2 class="text_blue">What does it do?</h2>
-          <p class="text_green">There air is full of a lot of stuff! Airhead detects the 'stuff' most important to you. It is packed full of sensors to calculate the quality of the air, and send the results to the cloud.</p>
+          <h2>What does it do?</h2>
+          <p>There air is full of a lot of stuff! Airhead detects the 'stuff' most important to you. It is packed full of sensors to calculate the quality of the air, and send the results to the cloud.</p>
       </div>
       <div class="row">
           <!--==========Item==========-->
@@ -177,19 +164,30 @@
 </section>
 
 <section class="row graph" id="graphing">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-          <img class="img-fluid" src="{{ url_for('static', filename='img/graph.jpg') }}"> </img>
-      </div>
-      <div class="col-md-6">
-        <div class="row section-header">
-          <h2 class="text_blue">Analysis of Data</h2>
-          <p class="text_green">In the hub the user can view and plot graphs of the pollutants from their Airheads.</p>
-        </div>
+  <div class="row">
+    <div class="col-md-6">
+        <img class="img-fluid" src="{{ url_for('static', filename='img/graph.jpg') }}"> </img>
+    </div>
+    <div class="col-md-6">
+      <div class="row section-header">
+        <h2 class="text_blue">Analysis of Data</h2>
+        <p class="text_green">In the hub the user can view and plot graphs of the pollutants from their Airheads.</p>
       </div>
     </div>
-  
+  </div>
+</section>
+
+<section class="row map" id="mapping">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row section-header">
+        <h2 class="text_blue">Global Mapping Analysis</h2>
+        <p class="text_green">Analyse how geographical setting affects your air quality.</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+        <img class="img-fluid" src="{{ url_for('static', filename='img/map.png') }}"> </img>
+    </div>
   </div>
 </section>
 

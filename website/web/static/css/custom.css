@@ -1,5 +1,5 @@
 #secondaryNav {
-  background-color: #212529;
+  background-color: rgb(28, 89, 105);
 }
 
 #secondaryNav .navbar-toggler {
@@ -63,14 +63,6 @@
     padding: 12px 0;
   }
 
-.text-white{
-  color: #ced4da;
-}
-
-.text-yellow{
-  color: #fed136;
-}
-
 .section {
   padding: 80px 0;
 }
@@ -92,6 +84,7 @@
 .text_blue {
   color: rgb(28, 89, 105);
 }
+
 /* Section Headers for different types */
 .section-header:after {
   background: #eee;
@@ -100,6 +93,7 @@
 
 .section-header h2 {
   width: 100%;
+  color: rgb(28, 89, 105);
   display: inline-block;
   text-align: center;
 }
@@ -108,6 +102,7 @@
   width: 100%;
   display: inline-block;
   text-align: center;
+  color: rgb(5, 128, 87);
 }
 
 .section-header.v2:after {
