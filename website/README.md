@@ -60,3 +60,7 @@ supervisorctl reload
 supervisorctl status all
 supervisorctl stop all
 supervisorctl start all
+
+## initializing/using sqlite3
+Load schema into database file:
+`sqlite3 mydatabase.db < db.schema`

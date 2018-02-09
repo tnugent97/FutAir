@@ -1,7 +1,7 @@
 Flask
 Flask-DebugToolbar
 Flask-Login
-Flask-SQLAlchemy
+sqlite3
 Jinja2
 MarkupSafe
 Werkzeug
@@ -11,5 +11,4 @@ python-dateutil
 pytz
 raven
 requests
-SQLAlchemy
 psycopg2

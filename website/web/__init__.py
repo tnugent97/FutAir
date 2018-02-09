@@ -3,7 +3,17 @@ from config import config
 from flask import url_for, render_template
 from werkzeug.contrib.fixers import ProxyFix
 from raven.contrib.flask import Sentry
+import sqlite3
+from flask import g
 
+DATABASE = 'db/history.db'
+
+def get_db():
+    db = getattr(g, '_database', None)
+    if db is None:
+        db = g._database = sqlite3.connect(DATABASE)
+    return db
+    
 # setup logging
 import logging
 

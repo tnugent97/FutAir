@@ -60,6 +60,8 @@
     return sout
   }
   var airheads = JSON.parse('{{ data | tojson | safe}}');
+  console.log(airheads)
+  
   function initMap() {
       var imperial = {lat: 51.4988, lng: -0.1667};
       
