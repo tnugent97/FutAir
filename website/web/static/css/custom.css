@@ -62,3 +62,15 @@
     font-size: 1.25em;
     padding: 12px 0;
   }
+
+.text-white{
+  color: #ced4da;
+}
+
+.text-yellow{
+  color: #fed136;
+}
+
+section {
+  padding: 80px 0;
+}
