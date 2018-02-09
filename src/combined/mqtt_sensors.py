@@ -1,3 +1,11 @@
+from umqtt.simple import MQTTClient
+gc.collect()
+import network
+gc.collect()
+import machine
+gc.collect()
+import json
+gc.collect()
 from machine import I2C
 gc.collect()
 from machine import Pin
@@ -55,23 +63,47 @@ def gas_sensor_read(sensor):
     time.sleep_ms(20)
     return no2, co
 
+def main(server="192.168.0.10"):
+    ap_if = network.WLAN(network.AP_IF)
+    ap_if.active(False)
 
-# adc = adc_sensor_setup(13, 12, 100000)
-gas = gas_sensor_setup(5, 4, 100000)
-th = th_sensor_setup(5, 4)
-pre = pre_sensor_setup(5, 4, 100000)
+    sta_if = network.WLAN(network.STA_IF)
+    sta_if.active(True)
+    sta_if.connect('EEERover','exhibition')
 
-time.sleep_ms(500)
+    gas = gas_sensor_setup(5, 4, 100000)
+    th = th_sensor_setup(5, 4)
+    pre = pre_sensor_setup(5, 4, 100000)
 
-while True:
-    # adc_val = adc_sensor_read(adc)
-    gas_val = gas_sensor_read(gas)
-    th_val = th_sensor_read(th)
-    pre_val = pre_sensor_read(pre)
+    time.sleep_ms(500)
 
-    print("Temp and Hum ", th_val)
-    print("Gas ", gas_val,)
-    print("Pressure", pre_val)
-    # print("ADC ", adc_val)
+    c = MQTTClient(machine.unique_id(), server)
+    c.connect()
 
+    while True:
+        no2_val, co_val = gas_sensor_read(gas)
+        t_val, h_val = th_sensor_read(th)
+        pre_val = pre_sensor_read(pre)
 
+        send_msg = {
+            'NO2': no2_val,
+            'Temperature': t_val,
+            'Humidity': h_val,
+            'Pressure': pre_val,
+            'CO': co_val
+        }
+
+        print("Temp ", t_val)
+        print("no2 ", no2_val)
+        print("Pressure ", pre_val)
+        print("hum ", h_val)
+        print("co", co_val)
+
+        c.publish(b"esys/Thom&Doug/test", bytes(json.dumps(send_msg), 'utf-8'))
+
+        time.sleep_ms(5000)
+
+    c.disconnect()
+
+if __name__ == "__main__":
+    main()
