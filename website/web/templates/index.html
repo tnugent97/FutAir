@@ -8,8 +8,8 @@
 <header class="masthead">
   <div class="container">
     <div class="intro-text">
-      <div class="intro-lead-in">Welcome</div>
-      <div class="intro-heading text-uppercase">Airhead!</div>
+      <div class="intro-lead-in">A low cost, self powered air quality sensor for the future.</div>
+      <div class="intro-heading text-uppercase">Pollusense</div>
       <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services">Tell Me More</a>
     </div>
   </div>
@@ -69,21 +69,25 @@
       <div class="col-sm-3">
         <h4>Setup</h4>
         <i class="fa fa-cogs" aria-hidden="true"></i>
+        <p>Setup is painless. The Airhead powers itself using Solar and batteries. Automatically connects for transmission and starts sensing.</p>
       </div>
       <!--==========Item==========-->
       <div class="col-sm-3">
         <h4>Gather Data</h4>
         <i class="fa fa-microchip" aria-hidden="true"></i>
+        <p>Once the Airhead is setup, it will begin reading data at set intervals from the environment.</p>
       </div>
       <!--==========Item==========-->
       <div class="col-sm-3">
         <h4>Transmit</h4>
         <i class="fa fa-wifi" aria-hidden="true"></i>
+        <p>The data can be transmitted over a local network, or long distances using a low power radio network.</p>
       </div>
       <!--==========Item==========-->
       <div class="col-sm-3">
         <h4>Analyse</h4>
         <i class="fa fa-line-chart" aria-hidden="true"></i>
+        <p>View realtime readings from all your sensors as well as their histories. Analyse differents between sensors depending on location.</p>
       </div>
     </div>
   </div>
@@ -169,6 +173,23 @@
             </div>
           </div>
       </div>
+  </div>
+</section>
+
+<section class="row graph" id="graphing">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+          <img class="img-fluid" src="{{ url_for('static', filename='img/graph.jpg') }}"> </img>
+      </div>
+      <div class="col-md-6">
+        <div class="row section-header">
+          <h2 class="text_blue">Analysis of Data</h2>
+          <p class="text_green">In the hub the user can view and plot graphs of the pollutants from their Airheads.</p>
+        </div>
+      </div>
+    </div>
+  
   </div>
 </section>
 
