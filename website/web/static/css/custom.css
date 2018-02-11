@@ -179,8 +179,7 @@
   color: rgb(28, 89, 105);
 }
 
-.trees {
-  background-image: url("../img/ecotrees.jpg");
+.backing {
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
@@ -188,61 +187,19 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-
 }
 
-.trees-content {
+.trees {
   color: white;
-  font-size: 100px;
+  background-image: url("../img/ecotrees.jpg");
+}
+
+.backing-content {
+  /* font-size: 60px; */
   margin-left: 10%;
 }
 
 .sky {
-  text-align: center;
   color: rgb(28, 89, 105);
   background-image: url("../img/lightbluesky.jpg");
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-position: center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.content:before {
-  content: "";
-  position: fixed;
-  top: -5%;
-  left: -5%;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  
-  display: block;
-  background-image: url("../img/ecotrees.jpg");
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-position: center center;
-  background-size:cover;
-  width: 110%;
-  /* height: 110%; */
-  
-  -webkit-filter: blur(3px);
-  -moz-filter: blur(3px);
-  -o-filter: blur(3px);
-  -ms-filter: blur(3px);
-  filter: blur(3px);
-}
-
-.content {
-  overflow: auto;
-  position: relative;
-}
-
-.content p {
-  margin: 15px;
-  background: rgba(255, 255, 255, 0.3);
-  padding: 5px;
-  box-shadow: 0 0 5px gray;
 }
