@@ -1,0 +1,32 @@
+Received uplink: {
+    "payload": "UG9sbHV0aW9uIFNlbnNvciE=",
+    "port": 1,
+    "dev_addr": "d4439a1c",
+    "radio": {
+        "stat": 1,
+        "gw_band": "EU863-870",
+        "server_time": 1518362529.688339,
+        "modu": "LORA",
+        "gw_gps": {
+            "lat": 51.52864,
+            "alt": 65,
+            "lon": -0.12688
+        },
+        "gw_addr": "70b3d54b12200000",
+        "chan": 0,
+        "gateway_time": 1518362529.639637,
+        "datr": "SF12BW125",
+        "tmst": 4062236340,
+        "codr": "4/5",
+        "rfch": 0,
+        "lsnr": -13.5,
+        "rssi": -112,
+        "freq": 867.1,
+        "size": 30
+    },
+    "counter_up": 0,
+    "dev_eui": "9db069d19247e272",
+    "rx_time": 1518362529.639637,
+    "encrypted_payload": "pU4JLmrCDuqYLvQNkpLLjM0="
+}
+Payload: Pollution Sensor!

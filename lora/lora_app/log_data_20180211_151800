@@ -1,0 +1,31 @@
+Received uplink: {
+    "payload": "UG9sbHV0aW9uIFNlbnNvciE=",
+    "port": 1,
+    "dev_addr": "d4439a1c",
+    "radio": {
+        "stat": 1,
+        "gw_band": "EU863-870",
+        "server_time": 1518362289.350706,
+        "modu": "LORA",
+        "gw_gps": {
+            "lat": 51.52294,
+            "alt": 86,
+            "lon": -0.13229
+        },
+        "gw_addr": "70b3d54b13830000",
+        "chan": 0,
+        "gateway_time": 1518362289.300074,
+        "datr": "SF12BW125",
+        "tmst": 706694652,
+        "codr": "4/5",
+        "rfch": 0,
+        "lsnr": 0.2,
+        "rssi": -102,
+        "freq": 867.1,
+        "size": 30
+    },
+    "counter_up": 0,
+    "dev_eui": "9db069d19247e272",
+    "rx_time": 1518362289.300074,
+    "encrypted_payload": "pU4JLmrCDuqYLvQNkpLLjM0="
+}
