@@ -6,7 +6,7 @@ const btoa = require('btoa');
 const fs = require('fs');
 const connect = require('connect');
 const app = connect();
-
+//var http = require('http');
 var date = new Date().toISOString().replace(/T/, '_').replace(/-/g, '').replace(/:/g, '').replace( /\..+/, '');
 var filepath = './log_data_' + date;
 
@@ -37,12 +37,16 @@ var server = jayson.server({
         callback(null, reply);
     }
 });
-
+/*
+http.createServer(function (req, res) {
+	res.writeHead(200, {'Content-Type': 'text/plain'});
+	res.end('Hello World!');
+}).listen(9090);
+*/
 app.use(cors({methods: ['POST', 'GET']}));
 
 app.use(jsonParser());
 
 app.use(server.middleware());
 
-app.listen(8081);
-console.log("Running...");
+app.listen(9090);
