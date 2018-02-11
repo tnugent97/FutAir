@@ -16,7 +16,7 @@
 /**
  * Startup message to send
  */
-#define STARTUP_MESSAGE "Hello World!"
+#define STARTUP_MESSAGE "Pollution Sensor!"
 
 /**
  * Sensors to enable
@@ -60,7 +60,7 @@ lmic_pinmap pins = {
 
 // Track if the current message has finished sending
 bool dataSent = false;
-Adafruit_Si7021 sensor = Adafruit_Si7021();
+//Adafruit_Si7021 sensor = Adafruit_Si7021();
 
 /**
  * DHT Humidity/Temperature sensor
@@ -197,8 +197,8 @@ void setup() {
 
     #if defined(STARTUP_MESSAGE)
         // Send Startup Message
-        //sendStartupMessage();
-        sendBattery();
+        sendStartupMessage();
+        //sendBattery();
         delay(1000);
     #endif
 
@@ -791,16 +791,16 @@ void sendBattery() {
     measuredvbat *= 2;    // we divided by 2, so multiply back
     measuredvbat *= 3.3;  // Multiply by 3.3V, our reference voltage
     measuredvbat /= 1024; // convert to voltage
-    float val = sensor.readTemperature();
+    //float val = sensor.readTemperature();
     // Convert to a string
     char floatStr[10];
-    // dtostrf(measuredvbat, 3, 2, floatStr);
-    dtostrf(val, 3, 2, floatStr);
+    dtostrf(measuredvbat, 3, 2, floatStr);
+    //dtostrf(val, 3, 2, floatStr);
 
 
     // Put together the data to send
-    // char packet[20] = "Battery: ";
-    char packet[20] = "Temp: ";
+    char packet[20] = "Battery: ";
+    //char packet[20] = "Temp: ";
     strcat(packet, floatStr);
 
     // Debug message
