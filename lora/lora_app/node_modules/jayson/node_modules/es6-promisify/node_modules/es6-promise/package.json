@@ -1,0 +1,109 @@
+{
+  "name": "es6-promise",
+  "namespace": "es6-promise",
+  "version": "4.2.4",
+  "description": "A lightweight library that provides tools for organizing asynchronous code",
+  "main": "dist/es6-promise.js",
+  "typings": "es6-promise.d.ts",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "dist",
+    "lib",
+    "es6-promise.d.ts",
+    "auto.js",
+    "!dist/test"
+  ],
+  "devDependencies": {
+    "babel-plugin-transform-es2015-arrow-functions": "^6.22.0",
+    "babel-plugin-transform-es2015-block-scoping": "^6.24.1",
+    "babel-plugin-transform-es2015-classes": "^6.24.1",
+    "babel-plugin-transform-es2015-computed-properties": "^6.24.1",
+    "babel-plugin-transform-es2015-constants": "^6.1.4",
+    "babel-plugin-transform-es2015-destructuring": "^6.23.0",
+    "babel-plugin-transform-es2015-parameters": "^6.24.1",
+    "babel-plugin-transform-es2015-shorthand-properties": "^6.24.1",
+    "babel-plugin-transform-es2015-spread": "^6.22.0",
+    "babel-plugin-transform-es2015-template-literals": "^6.22.0",
+    "babel6-plugin-strip-class-callcheck": "^6.0.0",
+    "broccoli-babel-transpiler": "^6.0.0",
+    "broccoli-concat": "^3.1.0",
+    "broccoli-merge-trees": "^2.0.0",
+    "broccoli-rollup": "^2.0.0",
+    "broccoli-stew": "^1.5.0",
+    "broccoli-uglify-js": "^0.2.0",
+    "broccoli-watchify": "^1.0.1",
+    "ember-cli": "2.18.0-beta.2",
+    "ember-cli-dependency-checker": "^2.1.0",
+    "git-repo-version": "1.0.1",
+    "json3": "^3.3.2",
+    "mocha": "^4.0.1",
+    "promises-aplus-tests-phantom": "^2.1.0-revise"
+  },
+  "scripts": {
+    "build": "ember build --environment production",
+    "start": "ember s",
+    "test": "ember test",
+    "test:server": "ember test --server",
+    "test:node": "ember test --launch Mocha",
+    "test:browser": "ember test --launch PhantomJS",
+    "prepublishOnly": "ember build --environment production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/stefanpenner/es6-promise.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stefanpenner/es6-promise/issues"
+  },
+  "browser": {
+    "vertx": false
+  },
+  "keywords": [
+    "promises",
+    "promise",
+    "polyfill",
+    "futures"
+  ],
+  "author": {
+    "name": "Yehuda Katz, Tom Dale, Stefan Penner and contributors",
+    "url": "Conversion to ES6 API by Jake Archibald"
+  },
+  "license": "MIT",
+  "spm": {
+    "main": "dist/es6-promise.js"
+  },
+  "dependencies": {},
+  "gitHead": "314e4831d5a0a85edcb084444ce089c16afdcbe2",
+  "homepage": "https://github.com/stefanpenner/es6-promise#readme",
+  "_id": "es6-promise@4.2.4",
+  "_npmVersion": "5.6.0",
+  "_nodeVersion": "8.9.0",
+  "_npmUser": {
+    "name": "stefanpenner",
+    "email": "stefan.penner@gmail.com"
+  },
+  "dist": {
+    "integrity": "sha512-/NdNZVJg+uZgtm9eS3O6lrOLYmQag2DjdEXuPaHlZ6RuVqgqaVZfgYCepEIKsLqwdQArOPtC3XzRLqGGfT8KQQ==",
+    "shasum": "dc4221c2b16518760bd8c39a52d8f356fc00ed29",
+    "tarball": "https://registry.npmjs.org/es6-promise/-/es6-promise-4.2.4.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "jaffathecake",
+      "email": "jaffathecake@gmail.com"
+    },
+    {
+      "name": "stefanpenner",
+      "email": "stefan.penner@gmail.com"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/es6-promise-4.2.4.tgz_1516739536202_0.9075252988841385"
+  },
+  "_shasum": "dc4221c2b16518760bd8c39a52d8f356fc00ed29",
+  "_resolved": "https://registry.npmjs.org/es6-promise/-/es6-promise-4.2.4.tgz",
+  "_from": "es6-promise@>=4.0.3 <5.0.0"
+}
