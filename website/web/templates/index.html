@@ -166,29 +166,44 @@
 </section>
 
 <section class="row graph" id="graphing">
-  <div class="row">
-    <div class="col-md-6">
-        <img class="img-fluid" src="{{ url_for('static', filename='img/graph.jpg') }}"> </img>
-    </div>
-    <div class="col-md-6">
-      <div class="row section-header">
-        <h2 class="text_blue">Analysis of Data</h2>
-        <p class="text_green">In the hub the user can view and plot graphs of the pollutants from their Airheads.</p>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+          <img class="img-fluid" src="{{ url_for('static', filename='img/graph.jpg') }}"> </img>
+      </div>
+      <div class="col-md-6">
+        <div class="row section-header">
+          <h2 class="text_blue">Analysis of Data</h2>
+          <p class="text_green">In the hub the user can view and plot graphs of the pollutants from their Airheads.</p>
+          <ul class="text_green">
+            <li>
+              Information at your finger tips.
+            </li>
+            <li>
+              Track air quality from anywhere, anytime on the hub.
+            </li>
+            <li>
+              See current and historical data categorised by hour, day, week, month and year.
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <section class="row map" id="mapping">
-  <div class="row">
-    <div class="col-md-6">
-      <div class="row section-header">
-        <h2 class="text_blue">Global Mapping Analysis</h2>
-        <p class="text_green">Analyse how geographical setting affects your air quality.</p>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row section-header">
+          <h2 class="text_blue">Global Mapping Analysis</h2>
+          <p class="text_green">Analyse how geographical setting affects your air quality.</p>
+        </div>
       </div>
-    </div>
-    <div class="col-md-6">
-        <img class="img-fluid" src="{{ url_for('static', filename='img/map.png') }}"> </img>
+      <div class="col-md-6">
+          <img class="img-fluid" src="{{ url_for('static', filename='img/map.png') }}"> </img>
+      </div>
     </div>
   </div>
 </section>

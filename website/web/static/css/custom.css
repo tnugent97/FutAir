@@ -191,12 +191,17 @@
 
 .trees {
   color: white;
-  background-image: url("../img/ecotrees.jpg");
+  background-image: url("../img/grass.jpg");
 }
 
-.backing-content {
-  /* font-size: 60px; */
+.backing-content h2 {
+  font-size: 40px;
   margin-left: 10%;
+}
+
+.backing-content p {
+  font-size: 20px;
+  margin-left: 15%;
 }
 
 .sky {
