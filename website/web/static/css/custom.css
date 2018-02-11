@@ -1,5 +1,5 @@
 #secondaryNav {
-  background-color: rgb(43, 127, 99);
+  background-color: rgb(10, 41, 14);
 }
 
 #secondaryNav .navbar-toggler {
@@ -82,7 +82,7 @@
 }
 
 .text_blue {
-  color: rgb(43, 127, 99);
+  color: rgb(10, 41, 14);
 }
 
 /* Section Headers for different types */
@@ -93,7 +93,7 @@
 
 .section-header h2 {
   width: 100%;
-  color: rgb(43, 127, 99);
+  color: rgb(10, 41, 14);
   display: inline-block;
   text-align: center;
 }
@@ -169,14 +169,14 @@
 .how_icon p {
   margin-top: 35px;
   text-align: center;
-  color: rgb(43, 127, 99);
+  color: rgb(10, 41, 14);
 }
 
 .how_icon h4 {
   text-align: center;
   width: 100%;
   display: inline-block;
-  color: rgb(43, 127, 99);
+  color: rgb(10, 41, 14);
 }
 
 .backing {
@@ -205,6 +205,6 @@
 }
 
 .sky {
-  color: rgb(43, 127, 99);
+  color: rgb(10, 41, 14);
   background-image: url("../img/lightbluesky.jpg");
 }
