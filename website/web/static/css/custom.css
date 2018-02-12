@@ -103,6 +103,7 @@
   display: inline-block;
   text-align: center;
   color: rgb(5, 128, 87);
+  font: 300 22px "Poppins", sans-serif;
 }
 
 .section-header.v2:after {
@@ -207,4 +208,63 @@
 .sky {
   color: rgb(10, 41, 14);
   background-image: url("../img/lightbluesky.jpg");
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+/* Sane highlight colours */
+p::-moz-selection { /* Code for Firefox */
+  color: white;
+  
+}
+
+p::selection {
+  color: white;  
+}
+
+h1::-moz-selection { /* Code for Firefox */
+  color: white;
+  
+}
+
+h1::selection {
+  color: white;  
+}
+
+h2::-moz-selection { /* Code for Firefox */
+  color: white;
+  
+}
+
+h2::selection {
+  color: white;  
+}
+
+h3::-moz-selection { /* Code for Firefox */
+  color: white;
+  
+}
+
+h3::selection {
+  color: white;  
+}
+
+h4::-moz-selection { /* Code for Firefox */
+  color: white;
+  
+}
+
+h4::selection {
+  color: white;  
+}
+
+li::-moz-selection { /* Code for Firefox */
+  color: white;
+  
+}
+
+li::selection {
+  color: white;  
 }
