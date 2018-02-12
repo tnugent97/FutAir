@@ -102,7 +102,6 @@
   width: 100%;
   display: inline-block;
   text-align: center;
-  color: rgb(5, 128, 87);
   font: 300 22px "Poppins", sans-serif;
 }
 
@@ -193,6 +192,11 @@
 .trees {
   color: white;
   background-image: url("../img/grass.jpg");
+}
+
+.proto {
+  color: white;
+  background-image: url("../img/proto1.jpg");
 }
 
 .backing-content h2 {
