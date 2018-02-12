@@ -1,6 +1,6 @@
-/**
- * From http://forum.arduino.cc/index.php?topic=368720.0
- */
+/* Cos c is a pain a classic dtostrf function
+* which is required for sending the transmissions
+*/
 char *dtostrf(double value, int width, unsigned int precision, char *result) {
 	int decpt, sign, reqd, pad;
 	const char *s, *e;

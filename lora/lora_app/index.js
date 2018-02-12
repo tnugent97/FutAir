@@ -7,6 +7,10 @@ const fs = require('fs');
 const connect = require('connect');
 const app = connect();
 
+/* Create Log files for the transmissions
+*  log files have data plus complete JSON dump
+*/
+
 var date = new Date().toISOString().replace(/T/, '_').replace(/-/g, '').replace(/:/g, '').replace( /\..+/, '');
 var filepath = './log_data_' + date;
 
@@ -46,6 +50,10 @@ var server = jayson.server({
         callback(null, reply);
     }
 });
+
+/* Run the server listening on port 9090
+*  Get the received message and decrypt the JSON
+*/
 
 app.use(cors({methods: ['POST', 'GET']}));
 app.use(jsonParser());
