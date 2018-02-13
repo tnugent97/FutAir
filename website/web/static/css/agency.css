@@ -188,7 +188,8 @@ header.masthead .intro-text .intro-lead-in {
   font-style: italic;
   line-height: 22px;
   margin-bottom: 25px;
-  font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  /* font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif; */
+  font-family: 'Exo 2', sans-serif;
 }
 
 header.masthead .intro-text .intro-heading {
@@ -196,7 +197,7 @@ header.masthead .intro-text .intro-heading {
   font-weight: 700;
   line-height: 50px;
   margin-bottom: 25px;
-  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Exo 2', sans-serif;
 }
 
 @media (min-width: 768px) {
@@ -216,7 +217,7 @@ header.masthead .intro-text .intro-heading {
     font-weight: 700;
     line-height: 75px;
     margin-bottom: 50px;
-    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Exo 2', sans-serif;
   }
 }
 

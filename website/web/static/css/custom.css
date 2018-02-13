@@ -214,6 +214,11 @@
   background-image: url("../img/lightbluesky.jpg");
 }
 
+.traffic {
+  color: white;
+  background-image: url("../img/londontraffic.jpg");
+}
+
 body {
     font-family: "Poppins", sans-serif;
 }
