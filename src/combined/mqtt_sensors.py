@@ -1,3 +1,5 @@
+# Import the required libraries
+# Use Garbage collection for running on ESP8266
 from umqtt.simple import MQTTClient
 gc.collect()
 import network
@@ -23,14 +25,15 @@ gc.collect()
 import bmp180
 gc.collect()
 
-# GC collect does garbage collection
-
+# Setups for the various sensors
+# Temperature/Humidity Sensor Setup - SI7021
 def th_sensor_setup(_scl, _sda):
     print("Temperature/Humidity Sensor Setup")
     i2c = I2C(-1, scl=Pin(_scl), sda=Pin(_sda))
     s = si7021.SI7021(i2c)
     return s
 
+# Pressure Sensor Setup - BMP180
 def pre_sensor_setup(_scl, _sda, _freq):
     print("Pressure Sensor Setup")
     i2c = I2C(scl=Pin(_scl), sda=Pin(_sda), freq=_freq)
@@ -38,6 +41,7 @@ def pre_sensor_setup(_scl, _sda, _freq):
     s.oversample_sett = 2
     return s
 
+# Gas Sensor Setup - MiCS-4514
 def gas_sensor_setup(_scl, _sda, _freq):
     print("Gas Sensor Setup")
     i2c = I2C(scl=Pin(_scl), sda=Pin(_sda), freq=_freq)
@@ -48,23 +52,29 @@ def gas_sensor_setup(_scl, _sda, _freq):
     s.preHeaterOFF()
     return s
 
+# Read fns for the sensors
+# Pressure sensor read
 def pre_sensor_read(sensor):
     val = sensor.pressure
     time.sleep_ms(20)
     return val
 
+# Temperature/Humidity sensor read
 def th_sensor_read(sensor):
     t = sensor.temperature()
     h = sensor.humidity()
     time.sleep_ms(20)
     return t, h
 
+# Gas sensor read
 def gas_sensor_read(sensor):
     no2 = sensor.read_OX()
     co = sensor.read_RED()
     time.sleep_ms(20)
     return no2, co
 
+# Ip address needed for MQTT note: 192.168.0.10
+# SSID: EEERover, Password: exhibition
 def main(server="192.168.0.10"):
     # Setup the network
     ap_if = network.WLAN(network.AP_IF)
@@ -79,7 +89,7 @@ def main(server="192.168.0.10"):
     th = th_sensor_setup(5, 4)
     pre = pre_sensor_setup(5, 4, 100000)
 
-    # Wake for i2c setup
+    # Wait for i2c setup
     time.sleep_ms(500)
 
     c = MQTTClient(machine.unique_id(), server)
@@ -115,22 +125,7 @@ def main(server="192.168.0.10"):
         # MQTT publish the readings
         c.publish(b"esys/Thom&Doug/test", bytes(json.dumps(send_msg), 'utf-8'))
 
-        time.sleep_ms(5000)
-
-        # # configure RTC.ALARM0 to be able to wake the device
-        # rtc = machine.RTC()
-        # rtc.irq(trigger=rtc.ALARM0, wake=machine.DEEPSLEEP)
-
-        # # set RTC.ALARM0 to fire after 10 seconds (waking the device)
-        # rtc.alarm(rtc.ALARM0, 10000)
-
-        # # put the device to sleep
-        # machine.deepsleep()
-
-        # if machine.reset_cause() == machine.DEEPSLEEP_RESET:
-        #     print('woke from a deep sleep')
-        # else:
-        #     print('power on or hard reset')
+        time.sleep_ms(10000)
 
     c.disconnect()
 

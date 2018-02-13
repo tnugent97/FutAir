@@ -3,7 +3,9 @@ from machine import Pin
 import time
 import ads1115
 
+# D12 pin for the pre-heating element
 PIN_HEATING_NO2 = 12
+
 
 RED_SENSOR_CH = 1 #CO, Ammonia, H2S, Ethanol, Hydrogen...
 OX_SENSOR_CH = 2 #NO2, NO, Hydrogen
@@ -13,7 +15,6 @@ CALIB_R0_NO2 = 2200    #R0 calibration value for the NO2 sensor
 CALIB_R0_CO = 750000   #R0 calibration value for the CO sensor
 
 class MICS4514:
-
     def __init__(self, i2c):
         self.i2c = i2c
         self.adc = ads1115.ADS1115(i2c)
@@ -29,21 +30,22 @@ class MICS4514:
 
     def volt_RED(self):
         value = self.adc.read(ADC_RATE, RED_SENSOR_CH)
-        volts = (value * 3.3) / 32768
+        volts = (value * 3.3) / 32768 # 2^16, max V is 3.3
         return volts
 
     def volt_OX(self):
         value = self.adc.read(ADC_RATE, OX_SENSOR_CH)
-        volts = (value * 3.3) / 32768
+        volts = (value * 3.3) / 32768 # 2^16, max V is 3.3
         return volts
 
     def read_RED(self):
-        print("read RED")
         value = self.adc.read(ADC_RATE, RED_SENSOR_CH)
-        volts = (value * 3.3) / 32768
-        fRes = (5000 / volts - 1000) / CALIB_R0_CO #get Rs / R0 value
+        volts = (value * 3.3) / 32768 # 2^16, max V is 3.3
+        fRes = (5000 / volts - 1000) / CALIB_R0_CO # get Rs / R0 value
 
-        #convert to ppm"
+        # convert to ppm
+        # see datasheet graph
+        # checking if in valid sensor detection range
         if fRes > 0.7:
             fRes = 0.7
         if fRes > 0.6:
@@ -56,12 +58,13 @@ class MICS4514:
         return fConc
 
     def read_OX(self):
-        print("read OX")
         value = self.adc.read(ADC_RATE, RED_SENSOR_CH)
-        volts = (value * 3.3) / 32768
+        volts = (value * 3.3) / 32768 # 2^16, max V is 3.3
         fRes = (5000 / volts - 1000) / CALIB_R0_NO2 #get Rs / R0 value
 
-        #convert to ppm
+        # convert to ppm
+        # see datasheet graph
+        # checking if in valid sensor detection range
         if fRes < 3.0:
             fRes = 3.0
         if fRes >= 3.0 and fRes < 8.0:

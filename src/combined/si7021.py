@@ -9,7 +9,7 @@ _RESET = const(0xfe)
 _READ_USER1 = const(0xe7)
 _USER1_VAL = const(0x3a)
 
-
+# The el' classico cyclic redundancy code
 def _crc(data):
     crc = 0
     for byte in data:
@@ -24,31 +24,6 @@ def _crc(data):
 
 
 class SI7021:
-    """
-    A driver for the SI7021 temperature and humidity sensor.
-
-    MicroPython example::
-
-        import si7021
-        from machine import I2C, Pin
-
-        i2c = I2C(-1, Pin(5), Pin(4))
-        s = si7021.SI7021(i2c)
-        print(s.temperature())
-        print(s.humidity())
-
-    CircuitPython example::
-
-        import si7021
-        from bitbangio import I2C
-        from board import SCL, SDA
-
-        i2c = I2C(SCL, SDA).try_lock()
-        s = si7021.SI7021(i2c)
-        print(s.temperature())
-        print(s.humidity())
-    """
-
     def __init__(self, i2c, address=0x40):
         self.i2c = i2c
         self.address = address
@@ -57,9 +32,9 @@ class SI7021:
 
     def init(self):
         self.reset()
-        # Make sure the USER1 settings are correct.
+        # make sure settings correct
         while True:
-            # While restarting, the sensor doesn't respond to reads or writes.
+            # whilst restarting sensor doesn't respond
             try:
                 if hasattr(self.i2c, 'readfrom_mem'):
                     value = self.i2c.readfrom_mem(
@@ -70,7 +45,7 @@ class SI7021:
                     self.i2c.readfrom_into(self.address, data)
                     value = data[0]
             except OSError as e:
-                if e.args[0] not in ('I2C bus error', 19): # errno 19 ENODEV
+                if e.args[0] not in ('I2C bus error', 19): # errno 19 ENODEV (triggered)
                     raise
             else:
                 break
@@ -85,14 +60,14 @@ class SI7021:
         data = bytearray(3)
         data[0] = 0xff
         while True:
-            # While busy, the sensor doesn't respond to reads.
+            # while it is busy the sensor won't respond to reads
             try:
                 self.i2c.readfrom_into(self.address, data)
             except OSError as e:
                 if e.args[0] not in ('I2C bus error', 19): # errno 19 ENODEV
                     raise
             else:
-                if data[0] != 0xff: # Check if read succeeded.
+                if data[0] != 0xff: # read success?
                     break
         value, checksum = ustruct.unpack('>HB', data)
         if checksum != _crc(data[:2]):
@@ -103,52 +78,39 @@ class SI7021:
         self._command(_RESET)
 
     def humidity(self, raw=False, block=True):
-        """
-        Start a humidity measurement.
-
-        If ``block`` is ``True``, block until it is ready and return the
-        measured value. If it's ``False``, return None immediately, and the
-        value can be read later with a blocking call.
-
-        If ``raw`` is ``True``, return the measured value as 16-bit integer,
-        otherwise convert it into percentage of relative humidity and return it
-        as a floating point number.
-        """
-
+        # humidity read
         if not self._measurement:
             self._command(_HUMID_NOHOLD)
         elif self._measurement != _HUMID_NOHOLD:
             raise RuntimeError("other measurement in progress")
+        # if block is true, block until ready and return the
+        # measured value, if false return none.
         if not block:
             self._measurement = _HUMID_NOHOLD
             return None
         self._measurement = 0
         value = self._data()
+        # if raw is true, return measured value as 16-bit int
+        # else convert it to percentage and return float
         if raw:
             return value
         return value * 125 / 65536 - 6
 
     def temperature(self, raw=False, block=True):
-        """
-        Start a temperature measurement.
-
-        If ``block`` is ``True``, block until it is ready and return the
-        measured value. If it's ``False``, return None immediately, and the
-        value can be read later with a blocking call.
-
-        If ``raw`` is ``True``, return the measured value as 16-bit integer,
-        otherwise convert it into Celsius degrees and return as a floating
-        point number.
-        """
+        # temp read
         if not self._measurement:
             self._command(_TEMP_NOHOLD)
         elif self._measurement != _TEMP_NOHOLD:
             raise RuntimeError("other measurement in progress")
+        # if block is true, block until ready and return the
+        # measured value, if false return none.
         if not block:
             self._measurement = _TEMP_NOHOLD
             return None
         self._measurement = 0
         value = self._data()
+        # if raw is true, return measured value as 16-bit int
+        # else convert it to Celsius return float
         if raw:
             return value
         return value * 175.72 / 65536 - 46.85
