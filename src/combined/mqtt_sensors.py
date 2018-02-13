@@ -22,8 +22,6 @@ import si7021
 gc.collect()
 import bmp180
 gc.collect()
-import datetime
-gc.collect()
 
 # GC collect does garbage collection
 
@@ -87,24 +85,17 @@ def main(server="192.168.0.10"):
     c = MQTTClient(machine.unique_id(), server)
     c.connect()
 
-    # configure RTC.ALARM0 to be able to wake the device
-    rtc = machine.RTC()
-    rtc.irq(trigger=rtc.ALARM0, wake=machine.DEEPSLEEP)
-
-    # set RTC.ALARM0 to fire after 10 seconds (waking the device)
-    rtc.alarm(rtc.ALARM0, 10000)
-
     while True:
         # Gather readings
         no2_val, co_val = gas_sensor_read(gas)
         t_val, h_val = th_sensor_read(th)
         pre_val = pre_sensor_read(pre)
-        st = datetime.datetime.utcnow()
+        year, month, day, hour, minute, second, ms, dayinyear = time.localtime() 
 
         # Create JSON message to be sent
         # Dummy Long and Lat for Imperial
         send_msg = {
-            'time': st,
+            'time': [year, month, day, hour, minute, second, ms, dayinyear],
             'long': 0.1749,
             'lat': 51.4988,
             'no2': no2_val,
@@ -124,13 +115,22 @@ def main(server="192.168.0.10"):
         # MQTT publish the readings
         c.publish(b"esys/Thom&Doug/test", bytes(json.dumps(send_msg), 'utf-8'))
 
-        # put the device to sleep
-        machine.deepsleep()
+        time.sleep_ms(5000)
 
-        if machine.reset_cause() == machine.DEEPSLEEP_RESET:
-            print('woke from a deep sleep')
-        else:
-            print('power on or hard reset')
+        # # configure RTC.ALARM0 to be able to wake the device
+        # rtc = machine.RTC()
+        # rtc.irq(trigger=rtc.ALARM0, wake=machine.DEEPSLEEP)
+
+        # # set RTC.ALARM0 to fire after 10 seconds (waking the device)
+        # rtc.alarm(rtc.ALARM0, 10000)
+
+        # # put the device to sleep
+        # machine.deepsleep()
+
+        # if machine.reset_cause() == machine.DEEPSLEEP_RESET:
+        #     print('woke from a deep sleep')
+        # else:
+        #     print('power on or hard reset')
 
     c.disconnect()
 

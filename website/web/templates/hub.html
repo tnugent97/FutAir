@@ -23,16 +23,19 @@
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav text-uppercase ml-auto">
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#services">Services</a>
+          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#belief">Belief</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#about">About</a>
+          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#setup">Setup</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#team">Team</a>
+          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#measurements">Measurements</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#contact">Contact</a>
+          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#graphing">Data</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#mapping">Mapping</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{url_for('landing.hub')}}">Data Hub</a>
@@ -52,35 +55,93 @@
 <div id="map"></div>
 
 <script>
-  function prettyPrint(payload){
-    var sout = "";
-    for (var key in payload){
-      sout += `${key}: ${payload[key]}\n`
+  function getCol(val,med,high){
+    var colour = "#51a839";
+    var level = 0;
+    if (val > med){
+      colour = "#ed9726";
+      level = 1;
     }
-    return sout
+    if (val > high) {
+      colour = "#ed5326";
+      level = 2;
+    }
+    return {"colour":colour,"level":level};
   }
-  var Futairs = JSON.parse('{{ data | tojson | safe}}');
-  console.log(Futairs)
+  
+  function prettyPrint(payload){
+    var sout = ""; //"<ul style='list-style: none;'>";
+    for (var key in payload){
+      var value = payload[key];
+      var col = "#000000";
+      if (key == "CO"){
+        col = getCol(value,5,7).colour;
+      }
+      if (key == "NO2"){
+        col = getCol(value,55,60).colour;
+      }
+      console.log(col);
+      sout += `<h5>${key}: <font style=\"color:${col};\">${value}</font></h5>`;
+    }
+    return sout;
+  }
+  var futairs = JSON.parse('{{ data | tojson | safe}}');
+  console.log(futairs)
   
   function initMap() {
       var imperial = {lat: 51.4988, lng: -0.1667};
-      
       var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 12,
+        zoom: 15,
         center: imperial
       });
-      
-      for (var key in Futairs) {
-          var Futair = Futairs[key]
-          var marker = new google.maps.Marker({
-            position: {lat: Futair.location.lat, lng: Futair.location.lng},
-            map: map,
-            title: prettyPrint(Futair.payload)
-            //payload: Futair.payload
+      for (var key in futairs) {
+          var futair = futairs[key]
+          //var marker = new google.maps.Marker({
+          //  position: {lat: futair.location.lat, lng: futair.location.lng},
+          //  map: map,
+          //  title: prettyPrint(futair.payload)
+          //  //payload: futair.payload
+          //});
+          console.log(getCol(futair.payload.NO2,55,60));
+          var circ_col1 = getCol(futair.payload.NO2,55,60);
+          var circ_col2 = getCol(futair.payload.CO,5,7);
+          console.log(getCol(futair.payload.CO,5,7));
+          if (circ_col1.level > circ_col2.level) {
+            circle_colour = circ_col1.colour;
+          } else {
+            circle_colour = circ_col2.colour;
+          }
+          var circ = new google.maps.Circle({
+            center:{lat: futair.location.lat, lng: futair.location.lng},
+            radius:200,
+            map:map,
+            strokeColor:circle_colour,
+            strokeOpacity:0.8,
+            strokeWeight:2,
+            fillColor:circle_colour,
+            fillOpacity:0.4,
+            title: prettyPrint(futair.payload),
+            payload: futair.payload
+          });
+          var mark = new google.maps.Marker({
+            map: map
+          });
+          var infowindow = new google.maps.InfoWindow({});
+          circ.addListener('mouseover', function () {
+            if (typeof this.title !== "undefined") {
+              mark.setPosition(this.getCenter()); // get circ's center
+              mark.setVisible(false); // hide the marker
+              infowindow.setContent(this.title); // set content
+              infowindow.open(map, mark); // open at circle location
+              
+            }
+          });
+
+          circ.addListener('mouseout', function () {
+            infowindow.close();
           });
         }
       }
-
   //function initMap() {
   //  var imperial = new google.maps.LatLng(51.4988, -0.1667);
   //  var map = new google.maps.Map(document.getElementById('map'), {
@@ -90,14 +151,14 @@
   //  
   //  }
   //
-  //  for (var key in Futairs) {
-  //    var Futair = Futairs.key;
-  //    var pos = new google.maps.LatLng(Futair.location.lat, Futair.location.lon);
+  //  for (var key in futairs) {
+  //    var futair = futairs.key;
+  //    var pos = new google.maps.LatLng(futair.location.lat, futair.location.lon);
   //    var marker = new google.maps.Marker({
-  //      position: {lat: Futair.location.lat, lng: Futair.location.lon},
+  //      position: {lat: futair.location.lat, lng: futair.location.lon},
   //      map: map,
   //      title: key,
-  //      payload: Futair.payload
+  //      payload: futair.payload
   //    });
   //    
   //}
@@ -107,7 +168,7 @@
   //  position: imperial,
   //  map: map,
   //  title: "Hello world",
-  //  payload: Futair.payload
+  //  payload: futair.payload
   //});
   //testmarker.setMap(map);
 </script>

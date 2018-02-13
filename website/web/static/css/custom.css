@@ -2,25 +2,32 @@
   background-color: rgb(10, 41, 14);
 }
 
+#secondaryNav .navbar-brand {
+    color: rgb(5, 128, 87);
+    font-family: 'Kaushan Script','Helvetica Neue',Helvetica,Arial,cursive;
+}
+
+#secondaryNav .navbar-brand:hover{
+  color:rgb(9, 95, 66)
+}
+
+#secondaryNav .navbar-nav .nav-item .nav-link:hover{
+  color: rgb(5, 128, 87)
+}
+
 #secondaryNav .navbar-toggler {
   font-size: 12px;
   right: 0;
   padding: 13px;
   text-transform: uppercase;
-  color: white;
   border: 0;
-  background-color: #fed136;
   font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 #secondaryNav .navbar-brand {
-  color: #fed136;
   font-family: 'Kaushan Script', 'Helvetica Neue', Helvetica, Arial, cursive;
 }
 
-#secondaryNav .navbar-brand.active, #secondaryNav .navbar-brand:active, #secondaryNav .navbar-brand:focus, #secondaryNav .navbar-brand:hover {
-  color: #fec503;
-}
 
 #secondaryNav .navbar-nav .nav-item .nav-link {
   font-size: 90%;
@@ -31,9 +38,6 @@
   font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-#secondaryNav .navbar-nav .nav-item .nav-link.active, #secondaryNav .navbar-nav .nav-item .nav-link:hover {
-  color: #fed136;
-}
 
   #secondaryNav {
     padding-top: 25px;

@@ -7,6 +7,8 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, userdata, msg):
     print(msg.topic+" "+str(msg.payload))
+    with open('../../website/web/db/mqtt.json', 'a') as f:
+        f.write(str(msg.payload) + "\n")
 
 client = mqtt.Client()
 client.on_connect = on_connect
