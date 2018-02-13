@@ -37,9 +37,9 @@ var server = jayson.server({
     },
     downlink: function(args, callback) {
 
-    /* Print out the downlink message received from the Everynet Network on the console and
-    * send back an ACK, which will then be sent to the device.
-    */
+        /* Print out the downlink message received from the Everynet Network on the console and
+        * send back an ACK, which will then be sent to the device.
+        */
 
         console.log("Received downlink: " + JSON.stringify(args, null, 4));
 

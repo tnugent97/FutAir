@@ -1,3 +1,9 @@
+/*****************************************
+LoRa test written for UK 868 Mhz band
+connecting to the BT Tower, London. 
+Sending Payload packets to 'thingsconnected'.
+******************************************/
+
 // Include necessary libraries
 #include <Arduino.h>
 #include <elapsedMillis.h>
@@ -6,12 +12,11 @@
 #include <hal/hal.h>
 #include <SPI.h>
 #include "dtostrf.h"
-#include <Adafruit_Si7021.h>
 
 /*
  * How often should data be sent?
  */
-#define UpdateInterval 1    // Update Every 30 mins
+#define UpdateInterval 1    // Update every n mins
 
 /*
  * Startup message to send
@@ -21,6 +26,7 @@
 
 /**
  * Sensors to enable
+ * Add the remaining sensors Douglas...
  */
 #define SENSOR_FEATHER_BATTERY  // Battery Voltage
 #define SENSOR_FEATHER_MEMORY   // Free memory
@@ -159,7 +165,6 @@ void sendFreeMemory() {
     }
 
     // Get the free memory
-    // https://learn.adafruit.com/adafruit-feather-m0-basic-proto/adapting-sketches-to-m0#how-much-ram-available
     char stack_dummy = 0;
     int freeMem = &stack_dummy - sbrk(0);
 
@@ -316,10 +321,7 @@ void sendTransmitMessage() {
 #endif
 
 
-// ----------------------------------------------------------------------------
 // LMIC CALLBACKS
-// ----------------------------------------------------------------------------
-
 // LoRaWAN Application identifier (AppEUI)
 static const u1_t AppEui[8] PROGMEM = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 

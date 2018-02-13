@@ -37,6 +37,14 @@ def index():
     return render_template('index.html', page_title='Home')
 
 
+@landing.route("/chart")
+def chart():
+    labels = ["January","February","March","April","May","June","July","August"]
+    values = [10,9,8,7,6,4,7,8]
+    return render_template('chart.html', values=values, labels=labels)
+
+
+
 DATABASE = 'web/db/history.db'
 def make_dicts(cursor, row):
     return dict((cursor.description[idx][0], value)

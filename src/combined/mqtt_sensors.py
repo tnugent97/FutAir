@@ -25,6 +25,8 @@ gc.collect()
 import datetime
 gc.collect()
 
+# GC collect does garbage collection
+
 def th_sensor_setup(_scl, _sda):
     print("Temperature/Humidity Sensor Setup")
     i2c = I2C(-1, scl=Pin(_scl), sda=Pin(_sda))
