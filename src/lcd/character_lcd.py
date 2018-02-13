@@ -69,7 +69,7 @@ class Character_LCD(object):
 
         self.cols = cols
         self.lines = lines
-        #  save pin numbers
+
         self.reset = rs
         self.enable = en
         self.dl4 = d4
@@ -105,7 +105,6 @@ class Character_LCD(object):
     def set_cursor(self, col, row):
         if row > self.lines:
             row = self.lines - 1
-        # Set location
         self._write8(LCD_SETDDRAMADDR | (col + LCD_ROW_OFFSETS[row]))
 
     def blink(self, blink):
@@ -137,22 +136,13 @@ class Character_LCD(object):
         self._write8(LCD_DISPLAYCONTROL | self.displaycontrol)
 
     def _write8(self, value, char_mode=False):
-        # Sends 8b ``value`` in ``char_mode``.
-        # :param value: bytes
-        # :param char_mode: character/data mode selector. False (default) for
-        # data only, True for character bits.
-        #  one ms delay to prevent writing too quickly.
         time.sleep(0.001)
-        #  set character/data bit. (charmode = False)
         self.reset.value(char_mode)
-        # WRITE upper 4 bits
         self.dl4.value(((value >> 4) & 1) > 0)
         self.dl5.value(((value >> 5) & 1) > 0)
         self.dl6.value(((value >> 6) & 1) > 0)
         self.dl7.value(((value >> 7) & 1) > 0)
-        #  send command
         self._pulse_enable()
-        # WRITE lower 4 bits
         self.dl4.value((value & 1) > 0)
         self.dl5.value(((value >> 1) & 1) > 0)
         self.dl6.value(((value >> 2) & 1) > 0)
@@ -160,9 +150,7 @@ class Character_LCD(object):
         self._pulse_enable()
 
     def _pulse_enable(self):
-        # Pulses (lo->hi->lo) to send commands.
         self.enable.value(0)
-        # 1microsec pause
         time.sleep(0.0000001)
         self.enable.value(1)
         time.sleep(0.0000001)
@@ -178,15 +166,11 @@ class Character_LCD(object):
 
     def message(self, text):
         line = 0
-        #  iterate thru each char
         for char in text:
-            # if character is \n, go to next line
             if char == '\n':
                 line += 1
-                #  move to left/right depending on text direction
                 col = 0 if self.displaymode & LCD_ENTRYLEFT > 0 else self.cols-1
                 self.set_cursor(col, line)
-            # Write character to display
             else:
                 self._write8(ord(char), True)
 
@@ -195,5 +179,3 @@ class Character_LCD(object):
         self._write8(LCD_SETCGRAMADDR | (location << 3))
         for i in range(8):
             self._write8(pattern[i], char_mode=True)
-
-#pylint: enable-msg=too-many-instance-attributes
