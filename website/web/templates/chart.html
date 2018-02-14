@@ -110,7 +110,8 @@ var LineChartDemo = new Chart(mychart).Line(barData, {
 </div>
 <script>
 
- 
+// Change generic parameters in the macro above (and add additional arguments if necessary)
+// make_chart(chartname, data, labels, start_value, step, max)
 {{ make_chart('chart1',temps,times,0,8,32) }}
 
 {{ make_chart('chart2',no2s,times,0,1,600) }}
