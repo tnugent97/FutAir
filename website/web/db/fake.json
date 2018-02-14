@@ -1,0 +1,22 @@
+{
+        "uniqueid1":
+            {"location":{"lat":51.4988,"lng":-0.1749},
+             "payload":{
+                "temp":5,
+                "humidity":0.62,
+                "CO":7,
+                "NO2":50, 
+                "pressure":1017.5 
+                }
+            },
+        "uniqueid2":
+            {"location":{"lat":51.5073,"lng":-0.1657},
+             "payload":{
+                "temp":5, 
+                "humidity":0.62, 
+                "CO":5,
+                "NO2":40, 
+                "pressure":1012.5
+                }
+            }
+        }
