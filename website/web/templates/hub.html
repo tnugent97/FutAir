@@ -79,13 +79,14 @@
     for (var key in payload){
       var value = payload[key];
       var col = "#000000";
-      unit = " <small>ppm</small>"
+      var unit = "";
       if (key == "CO"){
         col = getCol(value,4,6).colour;
-        
+        unit = "<small>/10</small>"
       }
       if (key == "NO2"){
         col = getCol(value,55,60).colour;
+        unit = " <small>ppm</small>"
       }
       if (key== "temp"){
         unit = " <small>&#176;C</small>"
