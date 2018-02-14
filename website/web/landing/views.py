@@ -85,18 +85,22 @@ def index():
 
 @landing.route("/chart", methods=['GET'])
 @landing.route("/chart/<string:idn>", methods=['GET'])
-def chart(idn=None):
+@landing.route("/chart/<string:idn>/<string:meth>", methods=['GET'])
+def chart(idn=None,meth="mqtt"):
     times = []
     temperatures = []
     legend = 'Temperatures'
-    data = json.load(open(MQTT_DB))
+    
+    if meth=="lora":
+        data = json.load(open(LORA_DB))
+    else:
+        data = json.load(open(MQTT_DB))
     if idn is not None and idn in data:
         sensor_i = data.get(idn)
         for x in sensor_i:
             print x["time"]
             times.append(x["time"])
             temperatures.append(x["temp"])
-        return render_template('chart.html', values=temperatures, labels=times, legend=legend)
     else:
         temperatures = [23.7, 23.4, 23.8, 23.8, 18.7, 15.2,
                     11.8, 08.7, 08.2, 18.3, 10.5, 15.7,
@@ -104,7 +108,7 @@ def chart(idn=None):
         times = ["12:00PM", "12:10PM", "12:20PM", "12:30PM", "12:40PM", "12:50PM",
                 "1:00PM", "1:10PM", "1:20PM", "1:30PM", "1:40PM", "1:50PM",
                 "2:00PM", "2:10PM", "2:20PM", "2:30PM", "2:40PM", "2:50PM"]
-        return render_template('chart.html', values=temperatures, labels=times, legend=legend)        
+    return render_template('chart.html', values=temperatures, labels=times, legend=legend)        
 
 @landing.route('/hub/{<string:meth>}')
     
