@@ -100,13 +100,11 @@ def main(server="192.168.0.10"):
         no2_val, co_val = gas_sensor_read(gas)
         t_val, h_val = th_sensor_read(th)
         pre_val = pre_sensor_read(pre)
-        year, month, day, hour, minute, second, ms, dayinyear = time.localtime() 
 
         # Create JSON message to be sent
         # Dummy Long and Lat for Imperial
         send_msg = {
-            'id': "1"
-            'time': [year, month, day, hour, minute, second, ms, dayinyear],
+            'id': "1",
             'long': 0.1749,
             'lat': 51.4988,
             'no2': no2_val,
@@ -126,7 +124,7 @@ def main(server="192.168.0.10"):
         # MQTT publish the readings
         c.publish(b"esys/Thom&Doug/test", bytes(json.dumps(send_msg), 'utf-8'))
 
-        time.sleep_ms(10000)
+        time.sleep_ms(5000)
 
     c.disconnect()
 
