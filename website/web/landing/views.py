@@ -5,6 +5,7 @@ import datetime
 import flask
 import logging
 import json
+import random
 #import sqlite3
 
 from flask import (
@@ -33,6 +34,49 @@ def make_error_response(description):
         status=400,
         content_type="application/json")
 
+def generate_fake_json(fname='test.json'):
+    # centre: lat: 51.4988, lng: -0.1667
+    data = {}
+    for i in range(3000):
+        #lat = 51.442687 + (float(random.randint(0,25000))/100000.0) # from -0.310859 to -0.058149
+        #lng = -0.283707 + (float(random.randint(0,50000))/100000.0) # from 51.433696 to 51.567723
+        lat = random.gauss(51.4988,0.27)
+        lng = random.gauss(-0.1667,0.27)
+        bottom= 51.466503
+        top= 51.520369
+        left= -0.192333
+        right= -0.059810
+        if lat < 50.9:
+            lat = 51.442687 + (float(random.randint(0,25000))/100000.0)
+        
+        temp = float(random.randint(500,1700))/100.0
+        humidity = float(random.randint(40,80))/100.0
+        CO = random.randint(1,8)
+        NO2 = float(random.randint(320,600))/10.0
+        if (lat > bottom) and (lat < top) and (lng > left) and (lng < right):
+            CO   = random.randint(5,10)
+            NO2 += random.randint(0,20)  
+        pressure = 99500 + float(random.randint(10,5000))/10.0
+        data[i] = {
+                    "location":{"lat":lat,"lng":lng},
+                    "payload":{
+                        "temp":temp,
+                        "humidity":humidity,
+                        "CO":CO,
+                        "NO2":NO2, 
+                        "pressure":pressure
+                    }
+                }
+    with open('web/db/{}'.format(fname), 'w') as outfile:
+        json.dump(data, outfile)
+    return
+    
+@landing.route('/fake/<string:fname>', methods=['GET'])
+@landing.route('/fake', methods=['GET'])
+def gen_fake_json(fname='test.json'):
+    generate_fake_json('test.json')
+    return redirect(url_for('landing.hub'), code=302)
+    
 @landing.route('/', methods=['GET'])
 @landing.route('/home', methods=['GET'])
 @landing.route('/home', methods=['GET'])
