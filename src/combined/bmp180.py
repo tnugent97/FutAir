@@ -4,10 +4,11 @@ import math
 import time
 
 class BMP180():
-    _bmp_addr = 119             # adress of BMP180 is hardcoded on the sensor
+    _bmp_addr = 119             # address of the sensor
 
     def __init__(self, i2c_bus):
 
+        # memory addresses found online/in datasheet
         _bmp_addr = self._bmp_addr
         self._bmp_i2c = i2c_bus
         self._bmp_i2c.start()
@@ -42,6 +43,7 @@ class BMP180():
                 self._B1, self._B2, self._MB, self._MC, self._MD, self.oversample_setting]
 
     # gauge raw
+    # get raw data to convert into vals
     def makegauge(self):
         delays = (5, 8, 14, 25)
         while True:
@@ -67,7 +69,7 @@ class BMP180():
             yield True
 
     def blocking_read(self):
-        if next(self.gauge) is not None: # Discard old data
+        if next(self.gauge) is not None: # discard old data
             pass
         while next(self.gauge) is None:
             pass
@@ -86,59 +88,53 @@ class BMP180():
 
     @property
     def temperature(self):
-        '''
-        Temperature in degree C.
-        '''
+        # convert temp to degrees C
         next(self.gauge)
         try:
             UT = unp('>h', self.UT_raw)[0]
         except:
             return 0.0
-        X1 = (UT-self._AC6)*self._AC5/2**15
-        X2 = self._MC*2**11/(X1+self._MD)
+        X1 = (UT-self._AC6) * self._AC5 / 2 ** 15
+        X2 = self._MC * 2 ** 11 / (X1 + self._MD)
         self.B5_raw = X1+X2
-        return (((X1+X2)+8)/2**4)/10
+        return (((X1 + X2) + 8) / 2 ** 4) / 10
 
     @property
     def pressure(self):
-        '''
-        Pressure in mbar.
-        '''
+        # Pressure in millibar
         next(self.gauge)
-        self.temperature  # Populate self.B5_raw
+        self.temperature  # populate the ol temp
         try:
             MSB = unp('B', self.MSB_raw)[0]
             LSB = unp('B', self.LSB_raw)[0]
             XLSB = unp('B', self.XLSB_raw)[0]
         except:
             return 0.0
-        UP = ((MSB << 16)+(LSB << 8)+XLSB) >> (8-self.oversample_setting)
+        UP = ((MSB << 16) + (LSB << 8) + XLSB) >> (8 - self.oversample_setting)
         B6 = self.B5_raw-4000
-        X1 = (self._B2*(B6**2/2**12))/2**11
-        X2 = self._AC2*B6/2**11
+        X1 = (self._B2 * (B6 ** 2 / 2**12)) / 2**11
+        X2 = self._AC2 * B6 / 2 ** 11
         X3 = X1+X2
-        B3 = ((int((self._AC1*4+X3)) << self.oversample_setting)+2)/4
-        X1 = self._AC3*B6/2**13
-        X2 = (self._B1*(B6**2/2**12))/2**16
-        X3 = ((X1+X2)+2)/2**2
-        B4 = abs(self._AC4)*(X3+32768)/2**15
-        B7 = (abs(UP)-B3) * (50000 >> self.oversample_setting)
+        B3 = ((int((self._AC1 * 4+X3)) << self.oversample_setting) + 2) / 4
+        X1 = self._AC3 * B6 / 2 ** 13
+        X2 = (self._B1 * (B6 ** 2 / 2 ** 12)) / 2**16
+        X3 = ((X1 + X2) + 2) / 2 ** 2
+        B4 = abs(self._AC4) * (X3 + 32768) / 2**15
+        B7 = (abs(UP) - B3) * (50000 >> self.oversample_setting)
         if B7 < 0x80000000:
-            pressure = (B7*2)/B4
+            pressure = (B7 * 2)/ B4
         else:
-            pressure = (B7/B4)*2
-        X1 = (pressure/2**8)**2
-        X1 = (X1*3038)/2**16
-        X2 = (-7357*pressure)/2**16
-        return pressure+(X1+X2+3791)/2**4
+            pressure = (B7 / B4) * 2
+        X1 = (pressure / 2**8)**2
+        X1 = (X1*3038) / 2**16
+        X2 = (-7357*pressure) / 2**16
+        return pressure+(X1+X2+3791) / 2**4
 
     @property
     def altitude(self):
-        '''
-        Altitude in m.
-        '''
+        # altitude in m
         try:
-            p = -7990.0*math.log(self.pressure/self.baseline)
+            p = -7990.0 * math.log(self.pressure / self.baseline)
         except:
             p = 0.0
         return p

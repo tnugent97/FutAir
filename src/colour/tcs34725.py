@@ -30,7 +30,7 @@ _ENABLE_WEN = const(0x08)
 _ENABLE_AEN = const(0x02)
 _ENABLE_PON = const(0x01)
 
-_GAINS = (1, 4, 16, 60)
+_GAINS = (1, 4, 16, 60) # gain 1x, 4x, 16x, 60x
 _CYCLES = (0, 1, 2, 3, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60)
 
 

@@ -105,6 +105,7 @@ def main(server="192.168.0.10"):
         # Create JSON message to be sent
         # Dummy Long and Lat for Imperial
         send_msg = {
+            'id': "1"
             'time': [year, month, day, hour, minute, second, ms, dayinyear],
             'long': 0.1749,
             'lat': 51.4988,
