@@ -174,7 +174,7 @@
       <div class="col-sm-3">
         <h4>Transmit</h4>
         <i class="fa fa-wifi" aria-hidden="true"></i>
-        <p>The data can be transmitted over a local network, or long distances using a low power radio network.</p>
+        <p>The data can be transmitted over a local network, or over long distances using a low power radio network.</p>
       </div>
       <!--==========Item==========-->
       <div class="col-sm-3">
@@ -191,14 +191,16 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6">
-          <img class="img-fluid" src="{{ url_for('static', filename='img/graph.jpg') }}"> </img>
+          <img class="img-fluid" src="{{ url_for('static', filename='img/map.png') }}"> </img>
       </div>
       <div class="col-md-6">
         <div class="row section-header">
           <h2 class="text_blue">Analyzing your data</h2>
+          <div class="container">
           <p>Users will have easy access to past and present pollution data via the Hub. Trends in pollution can be seen by a time frame of your choice - hourly, daily, monthly or yearly.</p>
           <p>We then superimpose this information on a map, so that the spread or containment of pollutants can be understood easily.</p>
           <p>Local councils and citizens can then understand the extent of the problem on a macro and micro scale, and track the impact of any new regulations.<p>
+          </div>
         </div>
       </div>
     </div>
@@ -207,6 +209,37 @@
 
 
 <!--==========PUT DATA HUB MAP HERE==========-->
+
+
+<!--==========Need to replace logos with prices and centre the section==========-->
+<section class="row capabilities" id="pricing">
+  <div class="container">
+    <div class="row section-header">
+      <h2>Pricing</h2>
+      <p>Our subscription based model makes it easy for you to get the data you need.</p>
+    </div>
+    <div class="row how_icon">
+      <!--==========Item==========-->
+      <div class="col-sm-3">
+        <h4>Monthly</h4>
+        <i class="fa fa-microchip" aria-hidden="true"></i>
+        <p>For entrepreneurs and scientists conducting rapid prototyping or short term experiments.  </p>
+      </div>
+      <!--==========Item==========-->
+      <div class="col-sm-3">
+        <h4>Yearly</h4>
+        <i class="fa fa-wifi" aria-hidden="true"></i>
+        <p>For monitoring medium to long term effects of changes in regulations to curb pollution.</p>
+      </div>
+      <!--==========Item==========-->
+      <div class="col-sm-3">
+        <h4>Multi Year</h4>
+        <i class="fa fa-line-chart" aria-hidden="true"></i>
+        <p>For constant monitoring of highly populated areas for the safety of local citizens.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 
 {% macro team_member_entry(img_path,name, role, twitter, github, linkedin) %}

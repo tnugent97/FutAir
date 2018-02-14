@@ -124,7 +124,19 @@ def main(server="192.168.0.10"):
         # MQTT publish the readings
         c.publish(b"esys/Thom&Doug/test", bytes(json.dumps(send_msg), 'utf-8'))
 
-        time.sleep_ms(5000)
+        # configure RTC.ALARM0 to be able to wake the device
+        rtc = machine.RTC()
+        rtc.irq(trigger=rtc.ALARM0, wake=machine.DEEPSLEEP)
+
+        # check if the device woke from a deep sleep
+        if machine.reset_cause() == machine.DEEPSLEEP_RESET:
+            print('woke from a deep sleep')
+
+        # set RTC.ALARM0 to fire after 10 seconds (waking the device)
+        rtc.alarm(rtc.ALARM0, 10000)
+
+        # put the device to sleep
+        machine.deepsleep()
 
     c.disconnect()
 
