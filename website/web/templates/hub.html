@@ -120,8 +120,9 @@
             strokeWeight:2,
             fillColor:circle_colour,
             fillOpacity:0.4,
-            title: prettyPrint(futair.payload),
-            payload: futair.payload
+            title: `<h5>Futair ${key}</h5>` + prettyPrint(futair.payload) + `<h5><a href="chart/${key}">View Chart</a></h5>`,
+            payload: futair.payload,
+            id: key
           });
           var mark = new google.maps.Marker({
             map: map
