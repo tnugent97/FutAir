@@ -69,19 +69,37 @@
     return {"colour":colour,"level":level};
   }
   
+  function precisionRound(number, precision) {
+    var factor = Math.pow(10, precision);
+    return Math.round(number * factor) / factor;
+  }
+  
   function prettyPrint(payload){
     var sout = ""; //"<ul style='list-style: none;'>";
     for (var key in payload){
       var value = payload[key];
       var col = "#000000";
+      unit = " <small>ppm</small>"
       if (key == "CO"){
         col = getCol(value,4,6).colour;
+        
       }
       if (key == "NO2"){
         col = getCol(value,55,60).colour;
       }
+      if (key== "temp"){
+        unit = " <small>&#176;C</small>"
+      }
+      if (key== "pressure"){
+        unit = " <small>Bar</small>"
+        value = precisionRound(value/1000,2);
+      }
+      if (key== "humidity"){
+        unit = "%"
+        value = value*100
+      }
       console.log(col);
-      sout += `<h5>${key}: <font style=\"color:${col};\">${value}</font></h5>`;
+      sout += `<h5>${key}: <font style=\"color:${col};\">${value}</font>${unit}</h5>`;
     }
     return sout;
   }
@@ -120,7 +138,7 @@
             strokeWeight:2,
             fillColor:circle_colour,
             fillOpacity:0.4,
-            title: `<h5>Futair ${key}</h5>` + prettyPrint(futair.payload) + `<h5><a href="chart/${key}">View Chart</a></h5>`,
+            title: `<h5><a href="chart/${key}">ID: ${key}</a></h5>` + prettyPrint(futair.payload),
             payload: futair.payload,
             id: key
           });
