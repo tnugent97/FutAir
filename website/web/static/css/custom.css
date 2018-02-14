@@ -176,6 +176,16 @@
   color: rgb(10, 41, 14);
 }
 
+.futair {
+  font-size: 75px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 75px;
+  margin-bottom: 50px;
+  font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+
 .how_icon h4 {
   text-align: center;
   width: 100%;
