@@ -296,3 +296,12 @@ li::-moz-selection { /* Code for Firefox */
 li::selection {
   color: white;  
 }
+
+.graphs {
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.graph_row {
+  margin-bottom: 35px;
+}
