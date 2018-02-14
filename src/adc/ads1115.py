@@ -70,6 +70,7 @@ _GAINS = (
     _PGA_0_256V  # 16x
 )
 
+# all possible channels
 _CHANNELS = {
     (0, None): _MUX_SINGLE_0,
     (1, None): _MUX_SINGLE_1,
@@ -81,15 +82,16 @@ _CHANNELS = {
     (2, 3): _MUX_DIFF_2_3,
 }
 
+# samples per second
 _RATES = (
-    _DR_128SPS,  # 128/8 samples per second
-    _DR_250SPS,  # 250/16 samples per second
-    _DR_490SPS,  # 490/32 samples per second
-    _DR_920SPS,  # 920/64 samples per second
-    _DR_1600SPS, # 1600/128 samples per second (default)
-    _DR_2400SPS, # 2400/250 samples per second
-    _DR_3300SPS, # 3300/475 samples per second
-    _DR_860SPS   # - /860 samples per Second
+    _DR_128SPS,  # 128/8 
+    _DR_250SPS,  # 250/16
+    _DR_490SPS,  # 490/32
+    _DR_920SPS,  # 920/64 
+    _DR_1600SPS, # 1600/128 (default)
+    _DR_2400SPS, # 2400/250 
+    _DR_3300SPS, # 3300/475 
+    _DR_860SPS   # - /860 
 )
 
 
@@ -103,25 +105,27 @@ class ADS1115:
         self.temp3 = bytearray(3)
 
     def _write_register(self, register, value):
+        # write a register
         self.temp3[0] = register
         self.temp3[1] = value >> 8
         self.temp3[2] = value & 0xff
         self.i2c.writeto(self.address, self.temp3)
 
     def _read_register(self, register):
+        # read a register
         self.temp1[0] = register
         self.i2c.writeto(self.address, self.temp1)
         self.i2c.readfrom_into(self.address, self.temp2)
         return (self.temp2[0] << 8) | self.temp2[1]
 
     def set_conv(self, rate, channel1, channel2 = None):
-        """Set mode for read_rev"""
+        # set mode for read rev
         self.mode = (_CQUE_NONE | _CLAT_NONLAT |
             _CPOL_ACTVLOW | _CMODE_TRAD | _RATES[rate] | _MODE_SINGLE |
             _OS_SINGLE | _GAINS[self.gain] | _CHANNELS[(channel1, channel2)])
         
     def read(self, rate, channel1, channel2 = None):
-        """Read voltage between a channel and GND.  Time depends on conversion rate."""
+        # read voltage between a channel and ref GND, time dependant on conversion rate
         self._write_register(_REGISTER_CONFIG, (_CQUE_NONE | _CLAT_NONLAT |
             _CPOL_ACTVLOW | _CMODE_TRAD | _RATES[rate] | _MODE_SINGLE |
             _OS_SINGLE | _GAINS[self.gain] | _CHANNELS[(channel1, channel2)]))
@@ -131,13 +135,13 @@ class ADS1115:
         return res if res < 32768 else res - 65536
 
     def read_rev(self):
-        """Read voltage between a channel and GND. and then start the next conversion."""
+        # read voltage between a channel and ref GND
         res = self._read_register(_REGISTER_CONVERT)
         self._write_register(_REGISTER_CONFIG, self.mode)
         return res if res < 32768 else res - 65536
 
     def alert_start(self, rate, channe1l, channel2 = None, threshold_high = 0x4000):
-        """Start continuous measurement, set ALERT pin on threshold."""
+        # start continuous reading, set ALERT pin on given threshold
         self._write_register(_REGISTER_LOWTHRESH, 0)
         self._write_register(_REGISTER_HITHRESH, threshold_high)
         self._write_register(_REGISTER_CONFIG, _CQUE_1CONV | _CLAT_LATCH |
@@ -145,7 +149,7 @@ class ADS1115:
             _MODE_CONTIN | _GAINS[self.gain] | _CHANNELS[(channel1, channel2)])
 
     def conversion_start(self, rate, channel1, channel2 = None):
-        """Start continuous measurement, trigger on ALERT/RDY pin."""
+        # start continuous reading, trigger on the ALERT pin
         self._write_register(_REGISTER_LOWTHRESH, 0)
         self._write_register(_REGISTER_HITHRESH, 0x8000)
         self._write_register(_REGISTER_CONFIG, _CQUE_1CONV | _CLAT_NONLAT |
@@ -153,7 +157,7 @@ class ADS1115:
             _MODE_CONTIN | _GAINS[self.gain] | _CHANNELS[(channel1, channel2)])
 
     def alert_read(self):
-        """Get the last reading from the continuous measurement."""
+        # get the last reading
         res = self._read_register(_REGISTER_CONVERT)
         return res if res < 32768 else res - 65536
 
