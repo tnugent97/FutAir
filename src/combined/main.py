@@ -28,14 +28,14 @@ gc.collect()
 # Setups for the various sensors
 # Temperature/Humidity Sensor Setup - SI7021
 def th_sensor_setup(_scl, _sda):
-    print("Temperature/Humidity Sensor Setup")
+    # print("Temperature/Humidity Sensor Setup")
     i2c = I2C(-1, scl=Pin(_scl), sda=Pin(_sda))
     s = si7021.SI7021(i2c)
     return s
 
 # Pressure Sensor Setup - BMP180
 def pre_sensor_setup(_scl, _sda, _freq):
-    print("Pressure Sensor Setup")
+    # print("Pressure Sensor Setup")
     i2c = I2C(scl=Pin(_scl), sda=Pin(_sda), freq=_freq)
     s = bmp180.BMP180(i2c)
     s.oversample_sett = 2
@@ -43,10 +43,10 @@ def pre_sensor_setup(_scl, _sda, _freq):
 
 # Gas Sensor Setup - MiCS-4514
 def gas_sensor_setup(_scl, _sda, _freq):
-    print("Gas Sensor Setup")
+    # print("Gas Sensor Setup")
     i2c = I2C(scl=Pin(_scl), sda=Pin(_sda), freq=_freq)
     s = mics4514.MICS4514(i2c)
-    print("Preheating")
+    # print("Preheating")
     s.preHeaterON()
     time.sleep_ms(10000)
     s.preHeaterOFF()
@@ -97,9 +97,11 @@ def main(server="192.168.0.10"):
 
  
     # Gather readings
-    no2_val, co_val = gas_sensor_read(gas)
-    t_val, h_val = th_sensor_read(th)
-    pre_val = pre_sensor_read(pre)
+    while True:
+        no2_val, co_val = gas_sensor_read(gas)
+        t_val, h_val = th_sensor_read(th)
+        pre_val = pre_sensor_read(pre)
+        time.sleep_ms(1000)
 
     # Create JSON message to be sent
     # Dummy Long and Lat for Imperial
@@ -115,29 +117,29 @@ def main(server="192.168.0.10"):
     }
 
     # Print out readings for debugging
-    print("Temp ", t_val)
-    print("no2 ", no2_val)
-    print("Pressure ", pre_val)
-    print("hum ", h_val)
-    print("co", co_val)
+    # print("Temp ", t_val)
+    # print("no2 ", no2_val)
+    # print("Pressure ", pre_val)
+    # print("hum ", h_val)
+    # print("co", co_val)
 
     # MQTT publish the readings
     c.publish(b"esys/Thom&Doug/test", bytes(json.dumps(send_msg), 'utf-8'))
     c.disconnect()
 
     # configure RTC.ALARM0 to be able to wake the device
-    rtc = machine.RTC()
-    rtc.irq(trigger=rtc.ALARM0, wake=machine.DEEPSLEEP)
+    # rtc = machine.RTC()
+    # rtc.irq(trigger=rtc.ALARM0, wake=machine.DEEPSLEEP)
 
-    # check if the device woke from a deep sleep
-    if machine.reset_cause() == machine.DEEPSLEEP_RESET:
-        print('woke from a deep sleep')
+    # # check if the device woke from a deep sleep
+    # if machine.reset_cause() == machine.DEEPSLEEP_RESET:
+    #     print('woke from a deep sleep')
 
-    # set RTC.ALARM0 to fire after 10 seconds (waking the device)
-    rtc.alarm(rtc.ALARM0, 3000)
+    # # set RTC.ALARM0 to fire after 10 seconds (waking the device)
+    # rtc.alarm(rtc.ALARM0, 3000)
 
-    # put the device to sleep
-    machine.deepsleep()
+    # # put the device to sleep
+    # machine.deepsleep()
 
     
 

@@ -11,8 +11,8 @@ RED_SENSOR_CH = 1 #CO, Ammonia, H2S, Ethanol, Hydrogen...
 OX_SENSOR_CH = 2 #NO2, NO, Hydrogen
 ADC_RATE = 4
 
-CALIB_R0_NO2 = 2200    #R0 calibration value for the NO2 sensor
-CALIB_R0_CO = 750000   #R0 calibration value for the CO sensor
+CALIB_R0_NO2 = 22000    #R0 calibration value for the NO2 sensor
+CALIB_R0_CO = 47000   #R0 calibration value for the CO sensor
 
 class MICS4514:
     def __init__(self, i2c):
@@ -38,10 +38,22 @@ class MICS4514:
         volts = (value * 3.3) / 32768 # 2^16, max V is 3.3
         return volts
 
-    def read_RED(self):
-        value = self.adc.read(ADC_RATE, RED_SENSOR_CH)
+    def read_OX(self):
+        value = self.adc.read(ADC_RATE, OX_SENSOR_CH)
         volts = (value * 3.3) / 32768 # 2^16, max V is 3.3
         fRes = (5000 / volts - 1000) / CALIB_R0_CO # get Rs / R0 value
+        print("ox",fRes)
+
+        if fRes >= 0.6 and fRes < 2.3:
+        
+        if fRes >= 2.3 and fRes < 4:
+        
+        if fRes >= 4 and fRes < 6.3:
+
+        if fRes >= 6.3 and fRes < 8.2:
+        
+        else:
+
 
         # convert to ppm
         # see datasheet graph
@@ -57,11 +69,11 @@ class MICS4514:
 
         return fConc
 
-    def read_OX(self):
+    def read_RED(self):
         value = self.adc.read(ADC_RATE, RED_SENSOR_CH)
         volts = (value * 3.3) / 32768 # 2^16, max V is 3.3
         fRes = (5000 / volts - 1000) / CALIB_R0_NO2 #get Rs / R0 value
-
+        print("red",fRes)
         # convert to ppm
         # see datasheet graph
         # checking if in valid sensor detection range
