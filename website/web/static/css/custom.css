@@ -193,6 +193,11 @@
   background-size: cover;
 }
 
+.models {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 .trees {
   color: white;
   background-image: url("../img/grass.jpg");

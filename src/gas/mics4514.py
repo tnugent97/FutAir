@@ -30,19 +30,18 @@ class MICS4514:
 
     def volt_RED(self):
         value = self.adc.read(ADC_RATE, RED_SENSOR_CH)
-        volts = (value * 3.3) / 32768 # 2^16, max V is 3.3
+        volts = (value * 3.3) / 32768 # 2^15, max V is 3.3
         return volts
 
     def volt_OX(self):
         value = self.adc.read(ADC_RATE, OX_SENSOR_CH)
-        volts = (value * 3.3) / 32768 # 2^16, max V is 3.3
+        volts = (value * 3.3) / 32768 # 2^15, max V is 3.3
         return volts
 
     def read_RED(self):
         value = self.adc.read(ADC_RATE, RED_SENSOR_CH)
         volts = (value * 3.3) / 32768 # 2^15, max V is 3.3
         fRes = (3.3 - volts) / volts
-        #print("RED fRes: ", fRes)
 
         #values measured from graph
         k = 0.5440680444
@@ -51,7 +50,6 @@ class MICS4514:
         log_val = math.log(fRes) / math.log(10) #equivalent to log10
 
         conc = 10 ** ((log_val - k) / m)
-        #print("RED CONC: ", conc)
 
         return conc
 
@@ -61,7 +59,6 @@ class MICS4514:
         value = self.adc.read(ADC_RATE, OX_SENSOR_CH)
         volts = (value * 3.3) / 32768 # 2^15, max V is 3.3
         fRes = (3.3 - volts) / volts
-        #print("OX fRes: ", fRes)
 
         #values measured from graph
         k = 0.7403626895
@@ -70,6 +67,5 @@ class MICS4514:
         log_val = math.log(fRes) / math.log(10) #equivalent to log10
 
         conc = 10 ** ((log_val - k) / m)
-        #print("OX CONC: ", conc)
 
         return conc
