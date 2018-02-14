@@ -110,6 +110,7 @@ def chart(idn=None,meth="mqtt"):
                 "2:00PM", "2:10PM", "2:20PM", "2:30PM", "2:40PM", "2:50PM"]
     return render_template('chart.html', values=temperatures[-10:], labels=times[-10:], legend=legend)        
 
+
 @landing.route('/hub/{<string:meth>}')
     
 @landing.route('/hub', methods=['GET'])
