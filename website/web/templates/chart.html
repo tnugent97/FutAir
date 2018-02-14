@@ -1,3 +1,54 @@
+<script>
+{% macro make_chart(chart_name,data,labels,start,steps,max) %}
+var barData = {
+labels : [{% for item in labels %}
+               "{{item}}",
+           {% endfor %}],
+datasets : [
+   {
+         fillColor: "rgba(151,187,205,0.2)",
+         strokeColor: "rgba(151,187,205,1)",
+         pointColor: "rgba(151,187,205,1)",
+         pointStrokeColor: "#fff",
+         pointHighlightFill: "#fff",
+         pointHighlightStroke: "rgba(151,187,205,1)",
+         bezierCurve : false,
+         data : [{% for item in data %}
+                        "{{item}}",
+                    {% endfor %}]
+   }]
+}
+
+ Chart.defaults.global.animationSteps = 50;
+ Chart.defaults.global.tooltipYPadding = 16;
+ Chart.defaults.global.tooltipCornerRadius = 0;
+ Chart.defaults.global.tooltipTitleFontStyle = "normal";
+ Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";
+ Chart.defaults.global.animationEasing = "easeOutBounce";
+ Chart.defaults.global.responsive = false;
+ Chart.defaults.global.scaleLineColor = "black";
+ Chart.defaults.global.scaleFontSize = 16;
+
+// get bar chart canvas
+var mychart = document.getElementById("{{chart_name}}").getContext("2d");
+
+steps = {{steps}}
+max = {{max}}
+// draw bar chart
+var LineChartDemo = new Chart(mychart).Line(barData, {
+     scaleOverride: true,
+     scaleSteps: steps,
+     scaleStepWidth: Math.ceil(max / steps),
+     scaleStartValue: {{start}},
+     scaleShowVerticalLines: true,
+     scaleShowGridLines : true,
+     barShowStroke : true,
+     scaleShowLabels: true,
+     bezierCurve: false,
+
+});
+{% endmacro %}
+</script>
 {% set active_page = 'Chart' %}
 
 {% extends 'shared/html/_base.html' %}
@@ -51,63 +102,20 @@
 <h1>Flask Chart.js</h1>
 <!-- bar chart canvas element -->
 <div class="container">
-  <canvas id="chart" width="1200" height="800"></canvas>
+  <canvas id="chart1" width="1200" height="800"></canvas>
+</div>
+
+<div class="container">
+  <canvas id="chart2" width="1200" height="800"></canvas>
 </div>
 <script>
- 
-   // bar chart data
-   //var lbls = {{labels}};
-   //var vals = {{values}};
-   //console.log(lbls,vals);
-   var barData = {
-   labels : [{% for item in labels %}
-                  "{{item}}",
-              {% endfor %}],
-   datasets : [
-      {
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            bezierCurve : false,
-            data : [{% for item in values %}
-                      {{item}},
-                    {% endfor %}]
-      }]
-   }
- 
-    Chart.defaults.global.animationSteps = 50;
-    Chart.defaults.global.tooltipYPadding = 16;
-    Chart.defaults.global.tooltipCornerRadius = 0;
-    Chart.defaults.global.tooltipTitleFontStyle = "normal";
-    Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";
-    Chart.defaults.global.animationEasing = "easeOutBounce";
-    Chart.defaults.global.responsive = false;
-    Chart.defaults.global.scaleLineColor = "black";
-    Chart.defaults.global.scaleFontSize = 16;
- 
-   // get bar chart canvas
-   var mychart = document.getElementById("chart").getContext("2d");
- 
-   steps = 8
-   max = 40
-   // draw bar chart
-   var LineChartDemo = new Chart(mychart).Line(barData, {
-        scaleOverride: true,
-        scaleSteps: steps,
-        scaleStepWidth: Math.ceil(max / steps),
-        scaleStartValue: 10,
-        scaleShowVerticalLines: true,
-        scaleShowGridLines : true,
-        barShowStroke : true,
-        scaleShowLabels: true,
-        bezierCurve: false,
- 
-   });
- 
- 
+
+// Change generic parameters in the macro above (and add additional arguments if necessary)
+// make_chart(chartname, data, labels, start_value, step, max)
+{{ make_chart('chart1',temps,times,0,8,32) }}
+
+{{ make_chart('chart2',no2s,times,0,1,600) }}
+
 </script>
 
 {% endblock fullPage %}
