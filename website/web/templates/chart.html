@@ -1,14 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-   <meta charset="utf-8" />
-   <title>Chart.js </title>
+{% set active_page = 'Chart' %}
+
+{% extends 'shared/html/_base.html' %}
+{% block head %}
  
    <!-- import plugin script -->
    <script src='static/js/chart.min.js'></script>
  
-</head>
-<body>
+{% endblock head %}
+{% block nav %}
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-shrink" id="secondaryNav">
+  <div class="container">
+    <a class="navbar-brand js-scroll-trigger" href="{{url_for('landing.index')}}#page-top">Futair</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav text-uppercase ml-auto">
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#belief">Belief</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#setup">Setup</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#measurements">Measurements</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#graphing">Data</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#mapping">Mapping</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('landing.hub')}}">Data Hub</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{% endblock nav %}
+{% block pageheader %}
+
+{% endblock pageheader %}
+
+{% block fullPage %}
  
 <h1>Flask Chart.js</h1>
 <!-- bar chart canvas element -->
@@ -67,6 +105,5 @@
  
  
 </script>
- 
-</body>
-</html>
+
+{% endblock fullPage %}
