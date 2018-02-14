@@ -1,4 +1,4 @@
-{% set active_page = 'Example' %}
+{% set active_page = 'Home' %}
 
 {% extends 'shared/html/_base.html' %}
 
@@ -14,19 +14,52 @@
   </div>
 </header>
 
+<section id="what">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 section-header">
+        <h2>What is Futair?</h2>
+        <p>Futair is the worlds most scalable air pollution sensor.</p>
+        <p>It has many titles to its name...</p>
+        <ul class="list-group list-group-flush text_blue">
+          <li class="list-group-item">
+            The least expensive sensor on the market.
+          </li>
+          <li class="list-group-item">
+            Self powered so can be deployed anywhere.
+          </li>
+          <li class="list-group-item">
+            Long range allowing for remote deployment.
+          </li>
+          <li class="list-group-item">
+            Wifi enabling home use.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="traffic backing">
+  <div class="backing-content">
+    <h2>Who is Futair for?</h2>
+    <p>Individuals, Governments and industry.</p>
+    <p>Anyone with an interest in the quality of the air.</p>
+  </div>
+</section>
 
 <section id="belief">
   <div class="container">
     <div class="row">
         <div class="col-lg-12 section-header">
-          <p> More than 80% of people living in urban areas that monitor air pollution are exposed to
-            air quality levels that exceed the World Health Organisation limits.
-            Populations in low-income cities are the most impacted; 98% of cities in low- and middle
-            income countries with more than 100,000 inhabitants do not meet World Health Organisation air quality guidelines.
-            <br><br>
-          <p>For example, NO2 pollution, which is produced largely by diesel vehicles, causes 5,900 early deaths every year in London. Most air quality zones across the UK break legal limits and the crisis was called a “public health emergency” by MPs in April. Scientists said that one in 10 cases of Alzheimer’s in people living near busy roads could be linked to air pollution.  </p>
-          <br><br>
+          <h2>The Problem</h2>
           <p>We believe that an important part of solving this problem is to have a cheap method of obtaining accurate and real time data on the extent of the crisis. Policy makers can devise and legislate new regulations more effectively if they have hard evidence for on the country-wide trends in air pollution. Law enforcement officials can then test the efficacy of these solutions by using a data driven approach to curbing emissions. <p>
+          <p> More than 80% of people living in urban areas that monitor air pollution are exposed to 
+            air quality levels that exceed the World Health Organisation limits. 
+            Populations in low-income cities are the most impacted; 98% of cities in low- and middle 
+            income countries with more than 100,000 inhabitants do not meet World Health Organisation air quality guidelines. 
+            However, in high income countries, that percentage decreases to 56%. </p>
+          <p>For example, NO2 pollution, which is produced largely by diesel vehicles, causes 5,900 early deaths every year in London. Most air quality zones across the UK break legal limits and the crisis was called a “public health emergency” by MPs in April. Scientists said that one in 10 cases of Alzheimer’s in people living near busy roads could be linked to air pollution.  </p> 
         </div>
       </div>
   </div>
@@ -37,28 +70,52 @@
     <h2>Futair</h2>
     <p>MARK I</p>
   </div>
-  <br><br><br>
-  <br><br><br>
+  <br><br><br><br><br><br>
+  <br><br><br><br><br>
 </section>
 
-<section class="row capabilities" id="what">
+
+<section class="row how" id="setup">
   <div class="container">
-    <div class="row">
-        <div class="col-lg-12 section-header">
-          <h2>Introducing Futair</h2>
-          <p> Futair is the most scalable air pollution sensor in the world.</p>
-          <br><br>
-          <p>We envision a future where millions of Futairs are deployed all across the globe to gather real time data on air pollution. In order to make this scale a reality, we've made Futair the cheapest product of its kind. It's solar power source and durable 3D printed case makes it self sustaining and ready for deployment anywhere in the world. It determines the local temperature, air pressure and concentration of a selection of pollutants, and then transmits this data to a sever of your choice.</p>
-          <br><br>
-          <p> Our main method of deployment will be collaborating with international governments, all of whom have a responsibilty to provide a healthy environment for their citizens. We also look forward to partnering with all industries - energy, automobiles, textiles, agriculture, and many more - by providing them with actionable data to reduce their carbon footprint. </p>
-        </div>
+    <div class="row section-header">
+      <h2>What makes it tick?</h2>
+      <p>How does the worlds more scalable and affordable air quality device actually work?</p>
+    </div>
+    <div class="row how_icon">
+      <!--==========Item==========-->
+      <div class="col-sm-3">
+        <h4>Setup</h4>
+        <i class="fa fa-cogs" aria-hidden="true"></i>
+        <p>Setup is painless. The Futair powers itself using Solar and batteries. Automatically connects for transmission and starts sensing.</p>
       </div>
+      <!--==========Item==========-->
+      <div class="col-sm-3">
+        <h4>Gather Data</h4>
+        <i class="fa fa-microchip" aria-hidden="true"></i>
+        <p>Once the Futair is setup, it will begin reading data at set intervals from the environment.</p>
+      </div>
+      <!--==========Item==========-->
+      <div class="col-sm-3">
+        <h4>Transmit</h4>
+        <i class="fa fa-wifi" aria-hidden="true"></i>
+        <p>The data can be transmitted over a local network, or long distances using a low power radio network.</p>
+      </div>
+      <!--==========Item==========-->
+      <div class="col-sm-3">
+        <h4>Analyse</h4>
+        <i class="fa fa-line-chart" aria-hidden="true"></i>
+        <p>View realtime readings from all your sensors as well as their histories. Analyse differents between sensors depending on location.</p>
+      </div>
+    </div>
   </div>
 </section>
 
-
-<!--==========IMAGE OF 3D PRINTED PROTOTYPE==========-->
-
+<section class="sky backing">
+  <div class="backing-content">
+    <h2>Clean air is happiness.</h2>
+    <p>The quality of the air around us affects how we feel and think.</p>
+  </div>
+</section>
 
 <section class="row capabilities" id="measurements">
   <div class="container">
@@ -79,20 +136,6 @@
                   </div>
               </div>
           </div>
-
-          <!--==========Item==========-->
-          <div class="col-sm-6 col-md-4 capability">
-            <div class="media">
-                <div class="media-left text_green">
-                    <span><i class="lnr lnr-car"></i></span>
-                </div>
-                <div class="media-body text_blue">
-                  <h4>Nitrogen Dioxide</h4>
-                  <p>Breathing raised levels inflames the lining of lungs and can reduce immunity to lung infections.</p>
-                </div>
-            </div>
-          </div>
-
           <!--==========Item==========-->
           <div class="col-sm-6 col-md-4 capability">
               <div class="media">
@@ -105,7 +148,6 @@
                   </div>
               </div>
           </div>
-
           <!--==========Item==========-->
           <div class="col-sm-6 col-md-4 capability">
             <div class="media">
@@ -126,11 +168,22 @@
                 </div>
                 <div class="media-body text_blue">
                     <h4>Temperature</h4>
-                    <p>The concentration of carbon monoxide can reach unhealthy levels in case of a temperature inversion.</p>
+                    <p>Track citywide temperature trends.</p>
                 </div>
             </div>
           </div>
-
+          <!--==========Item==========-->
+          <div class="col-sm-6 col-md-4 capability">
+            <div class="media">
+                <div class="media-left text_green">
+                    <span><i class="lnr lnr-car"></i></span>
+                </div>
+                <div class="media-body text_blue">
+                  <h4>Nitrogen Dioxide</h4>
+                  <p>Breathing raised levels inflames the lining of lungs and can reduce immunity to lung infections.</p>
+                </div>
+            </div>
+          </div>
           <!--==========Item==========-->
           <div class="col-sm-6 col-md-4 capability">
             <div class="media">
@@ -139,7 +192,7 @@
                 </div>
                 <div class="media-body text_blue">
                   <h4>Pressure</h4>
-                  <p>High pressure regions have still air which facilitates a build up of pollutants.</p>
+                  <p>Affects how pollutants are in the air.</p>
                 </div>
             </div>
           </div>
@@ -147,100 +200,66 @@
   </div>
 </section>
 
-
-<!--==========INSERT air-pollution-min.jpg and healthaffectsgraphic.png==========-->
-
-
-<section class="row capabilities" id="setup">
-  <div class="container">
-    <div class="row section-header">
-      <h2>What makes it tick?</h2>
-      <p>How does the world's more scalable and affordable air quality monitor actually work?</p>
-    </div>
-    <div class="row how_icon">
-      <!--==========Item==========-->
-      <div class="col-sm-3">
-        <h4>Setup</h4>
-        <i class="fa fa-cogs" aria-hidden="true"></i>
-        <p>Setup is painless. The Futair powers itself using Solar and batteries. Automatically connects for transmission and starts sensing.</p>
-      </div>
-      <!--==========Item==========-->
-      <div class="col-sm-3">
-        <h4>Gather Data</h4>
-        <i class="fa fa-microchip" aria-hidden="true"></i>
-        <p>Once the Futair is setup, it will begin reading data at set intervals from the environment.</p>
-      </div>
-      <!--==========Item==========-->
-      <div class="col-sm-3">
-        <h4>Transmit</h4>
-        <i class="fa fa-wifi" aria-hidden="true"></i>
-        <p>The data can be transmitted over a local network, or over long distances using a low power radio network.</p>
-      </div>
-      <!--==========Item==========-->
-      <div class="col-sm-3">
-        <h4>Analyse</h4>
-        <i class="fa fa-line-chart" aria-hidden="true"></i>
-        <p>View realtime readings from all your sensors as well as their histories. Analyse differents between sensors depending on location.</p>
-      </div>
-    </div>
+<section class="trees backing">
+  <div class="backing-content">
+    <h2>Data is power.</h2>
+    <p>We cannot solve air pollution without lots of data.</p>
   </div>
 </section>
-
 
 <section class="row graph" id="graphing">
   <div class="container">
     <div class="row">
       <div class="col-md-6">
-          <img class="img-fluid" src="{{ url_for('static', filename='img/map.png') }}"> </img>
+          <img class="img-fluid" src="{{ url_for('static', filename='img/graph.jpg') }}"> </img>
       </div>
       <div class="col-md-6">
         <div class="row section-header">
-          <h2 class="text_blue">Analyzing your data</h2>
-          <div class="container">
-          <p>Users will have easy access to past and present pollution data via the Hub. Trends in pollution can be seen by a time frame of your choice - hourly, daily, monthly or yearly.</p>
-          <p>We then superimpose this information on a map, so that the spread or containment of pollutants can be understood easily.</p>
-          <p>Local councils and citizens can then understand the extent of the problem on a macro and micro scale, and track the impact of any new regulations.<p>
-          </div>
+          <h2 class="text_blue">Analysis of Data</h2>
+          <p class="text_green">In the hub the user can view and plot graphs of the pollutants from their Futairs.</p>
+          <ul class="list-group list-group-flush text_blue">
+            <li class="list-group-item">
+              Information at your finger tips.
+            </li>
+            <li class="list-group-item">
+              Track air quality from anywhere, anytime on the hub.
+            </li>
+            <li class="list-group-item">
+              See current and historical data categorised by hour, day, week, month and year.
+            </li>
+          </ul>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-
-<!--==========PUT DATA HUB MAP HERE==========-->
-
-
-<!--==========Need to replace logos with prices and centre the section==========-->
-<section class="row capabilities" id="pricing">
+<section class="row map" id="mapping">
   <div class="container">
-    <div class="row section-header">
-      <h2>Pricing</h2>
-      <p>Our subscription based model makes it easy for you to get the data you need.</p>
-    </div>
-    <div class="row how_icon">
-      <!--==========Item==========-->
-      <div class="col-sm-3">
-        <h4>Monthly</h4>
-        <i class="fa fa-microchip" aria-hidden="true"></i>
-        <p>For entrepreneurs and scientists conducting rapid prototyping or short term experiments.  </p>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row section-header">
+          <h2 class="text_blue">Global Mapping Analysis</h2>
+          <p class="text_green">Analyse how geographical setting affects your air quality.</p>
+          <ul class="list-group list-group-flush text_blue">
+            <li class="list-group-item">
+              Understand air pollution on a macro and micro scale.
+            </li>
+            <li class="list-group-item">
+              Learn how where best to make changes to combat pollution.
+            </li>
+            <li class="list-group-item">
+              Monitor progress and hit targets.
+            </li>
+          </ul>
+        </div>
       </div>
-      <!--==========Item==========-->
-      <div class="col-sm-3">
-        <h4>Yearly</h4>
-        <i class="fa fa-wifi" aria-hidden="true"></i>
-        <p>For monitoring medium to long term effects of changes in regulations to curb pollution.</p>
-      </div>
-      <!--==========Item==========-->
-      <div class="col-sm-3">
-        <h4>Multi Year</h4>
-        <i class="fa fa-line-chart" aria-hidden="true"></i>
-        <p>For constant monitoring of highly populated areas for the safety of local citizens.</p>
+      <div class="col-md-6">
+          <img class="img-fluid" src="{{ url_for('static', filename='img/map.png') }}"> </img>
       </div>
     </div>
   </div>
 </section>
-
 
 {% macro team_member_entry(img_path,name, role, twitter, github, linkedin) %}
 <div class="col-sm-6">
@@ -284,7 +303,7 @@
       {{ team_member_entry('img/team/3.jpg','Thomas Nugent','3d Printer Guy','','','') }}
       {{ team_member_entry('img/team/3.jpg','Agni Iyer','Gas Dood','','','') }}
     </div>
-
+    
     <div class="row">
       <div class="col-lg-8 mx-auto text-center">
         <p class="large text-muted">The team are based in London and are dedicated to be on the cutting edge of the Internet of Things Technology and Sensing.</p>

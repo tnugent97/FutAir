@@ -230,54 +230,54 @@ body {
 /* Sane highlight colours */
 p::-moz-selection { /* Code for Firefox */
   color: white;
-
+  
 }
 
 p::selection {
-  color: white;
+  color: white;  
 }
 
 h1::-moz-selection { /* Code for Firefox */
   color: white;
-
+  
 }
 
 h1::selection {
-  color: white;
+  color: white;  
 }
 
 h2::-moz-selection { /* Code for Firefox */
   color: white;
-
+  
 }
 
 h2::selection {
-  color: white;
+  color: white;  
 }
 
 h3::-moz-selection { /* Code for Firefox */
   color: white;
-
+  
 }
 
 h3::selection {
-  color: white;
+  color: white;  
 }
 
 h4::-moz-selection { /* Code for Firefox */
   color: white;
-
+  
 }
 
 h4::selection {
-  color: white;
+  color: white;  
 }
 
 li::-moz-selection { /* Code for Firefox */
   color: white;
-
+  
 }
 
 li::selection {
-  color: white;
+  color: white;  
 }
