@@ -51,10 +51,10 @@ def generate_fake_json(fname='test.json'):
         
         temp = float(random.randint(500,1700))/100.0
         humidity = float(random.randint(40,80))/100.0
-        CO = random.randint(1,8)
+        CO = random.randint(1,6)
         NO2 = float(random.randint(320,600))/10.0
         if (lat > bottom) and (lat < top) and (lng > left) and (lng < right):
-            CO   = random.randint(5,10)
+            CO   += random.randint(1,2)
             NO2 += random.randint(0,20)  
         pressure = 99500 + float(random.randint(10,5000))/10.0
         data[i] = {

@@ -75,7 +75,7 @@
       var value = payload[key];
       var col = "#000000";
       if (key == "CO"){
-        col = getCol(value,5,7).colour;
+        col = getCol(value,4,6).colour;
       }
       if (key == "NO2"){
         col = getCol(value,55,60).colour;
@@ -104,8 +104,8 @@
           //});
           console.log(getCol(futair.payload.NO2,55,60));
           var circ_col1 = getCol(futair.payload.NO2,55,60);
-          var circ_col2 = getCol(futair.payload.CO,5,7);
-          console.log(getCol(futair.payload.CO,5,7));
+          var circ_col2 = getCol(futair.payload.CO,4,6);
+          console.log(getCol(futair.payload.CO,4,6));
           if (circ_col1.level > circ_col2.level) {
             circle_colour = circ_col1.colour;
           } else {
