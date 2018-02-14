@@ -133,7 +133,7 @@ def main(server="192.168.0.10"):
             print('woke from a deep sleep')
 
         # set RTC.ALARM0 to fire after 10 seconds (waking the device)
-        rtc.alarm(rtc.ALARM0, 5000)
+        rtc.alarm(rtc.ALARM0, 10000)
 
         # put the device to sleep
         machine.deepsleep()
