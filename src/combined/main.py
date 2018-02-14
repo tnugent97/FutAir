@@ -95,50 +95,51 @@ def main(server="192.168.0.10"):
     c = MQTTClient(machine.unique_id(), server)
     c.connect()
 
-    while True:
-        # Gather readings
-        no2_val, co_val = gas_sensor_read(gas)
-        t_val, h_val = th_sensor_read(th)
-        pre_val = pre_sensor_read(pre)
+ 
+    # Gather readings
+    no2_val, co_val = gas_sensor_read(gas)
+    t_val, h_val = th_sensor_read(th)
+    pre_val = pre_sensor_read(pre)
 
-        # Create JSON message to be sent
-        # Dummy Long and Lat for Imperial
-        send_msg = {
-            'id': "1",
-            'long': 0.1749,
-            'lat': 51.4988,
-            'no2': no2_val,
-            'co': co_val,
-            'temp': t_val,
-            'hum': h_val,
-            'pre': pre_val
-        }
+    # Create JSON message to be sent
+    # Dummy Long and Lat for Imperial
+    send_msg = {
+        'id': "1",
+        'long': 0.1749,
+        'lat': 51.4988,
+        'no2': no2_val,
+        'co': co_val,
+        'temp': t_val,
+        'hum': h_val,
+        'pre': pre_val
+    }
 
-        # Print out readings for debugging
-        print("Temp ", t_val)
-        print("no2 ", no2_val)
-        print("Pressure ", pre_val)
-        print("hum ", h_val)
-        print("co", co_val)
+    # Print out readings for debugging
+    print("Temp ", t_val)
+    print("no2 ", no2_val)
+    print("Pressure ", pre_val)
+    print("hum ", h_val)
+    print("co", co_val)
 
-        # MQTT publish the readings
-        c.publish(b"esys/Thom&Doug/test", bytes(json.dumps(send_msg), 'utf-8'))
-
-        # configure RTC.ALARM0 to be able to wake the device
-        rtc = machine.RTC()
-        rtc.irq(trigger=rtc.ALARM0, wake=machine.DEEPSLEEP)
-
-        # check if the device woke from a deep sleep
-        if machine.reset_cause() == machine.DEEPSLEEP_RESET:
-            print('woke from a deep sleep')
-
-        # set RTC.ALARM0 to fire after 10 seconds (waking the device)
-        rtc.alarm(rtc.ALARM0, 10000)
-
-        # put the device to sleep
-        machine.deepsleep()
-
+    # MQTT publish the readings
+    c.publish(b"esys/Thom&Doug/test", bytes(json.dumps(send_msg), 'utf-8'))
     c.disconnect()
+
+    # configure RTC.ALARM0 to be able to wake the device
+    rtc = machine.RTC()
+    rtc.irq(trigger=rtc.ALARM0, wake=machine.DEEPSLEEP)
+
+    # check if the device woke from a deep sleep
+    if machine.reset_cause() == machine.DEEPSLEEP_RESET:
+        print('woke from a deep sleep')
+
+    # set RTC.ALARM0 to fire after 10 seconds (waking the device)
+    rtc.alarm(rtc.ALARM0, 3000)
+
+    # put the device to sleep
+    machine.deepsleep()
+
+    
 
 if __name__ == "__main__":
     main()

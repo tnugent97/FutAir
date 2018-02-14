@@ -11,27 +11,27 @@ def on_connect(client, userdata, flags, rc):
 
 # When message received dump as JSON into our 'database'
 def on_message(client, userdata, msg):
-    saved_data = json.load(open('../../website/web/db/mqtt.json'))
-
+    with open('../../website/web/db/mqtt.json', 'r') as infile:
+        saved_data = json.load(infile)
+    # get date and time
     t = datetime.datetime.now().strftime("%y-%m-%d-%H-%M")
-
+    # add time to the payload
     payload = json.loads(msg.payload)
     payload["time"] = t
-
+    # get device id and remove from payload
     dev_id = payload["id"]
     del payload["id"]
-
+    # check if already received data from device
     if str(dev_id) in saved_data:
         print("found")
         data_list = saved_data[str(dev_id)]
         data_list.append(payload)
         saved_data[str(dev_id)] = data_list
-
     else:
         print("nop")
         saved_data[str(dev_id)] = [payload]
 
-    #print(saved_data)
+    print(saved_data)
     with open('../../website/web/db/mqtt.json', 'w') as outfile:
         json.dump(saved_data, outfile)
 
