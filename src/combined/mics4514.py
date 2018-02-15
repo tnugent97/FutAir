@@ -49,6 +49,7 @@ class MICS4514:
 
         log_val = math.log(fRes) / math.log(10) #equivalent to log10
 
+        #converts straight line from datasheet to equation
         conc = 10 ** ((log_val - k) / m)
 
         return conc
@@ -66,6 +67,7 @@ class MICS4514:
 
         log_val = math.log(fRes) / math.log(10) #equivalent to log10
 
+        #converts straight line from datasheet to equation
         conc = 10 ** ((log_val - k) / m)
 
         return conc

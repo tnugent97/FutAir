@@ -18,18 +18,18 @@ while True:
     lcd.message('Temp: 20')
     lcd.message('\x00')
     lcd.message('C\n')
-    lcd.message('Pressure: 100kPa')
+    lcd.message('Pressure: 1Bar')
 
     time.sleep(4)
     lcd.clear()
 
-    lcd.message('NO2: 100ppb\n')
-    lcd.message('CO: 10ppm')
+    lcd.message('NO2: 0.1ppm\n')
+    lcd.message('CO: 1.3ppm')
 
     time.sleep(4)
     lcd.clear()
 
-    lcd.message('Humidity: 40%')
+    lcd.message('Humidity: 42%')
 
     time.sleep(4)
     lcd.clear()
