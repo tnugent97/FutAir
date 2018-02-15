@@ -1,3 +1,4 @@
+#demo for lcd; cannot run with sensors because not enough memory on esp
 import time
 from machine import Pin
 import character_lcd
