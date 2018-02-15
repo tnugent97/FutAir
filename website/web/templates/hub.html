@@ -107,7 +107,7 @@
       }
       if (key== "humidity"){
         unit = "%"
-        value = value*100
+        value = precisionRound(value*100,1);
       }
       console.log(col);
       sout += `<h5>${key}: <font style=\"color:${col};\">${value}</font>${unit}</h5>`;
