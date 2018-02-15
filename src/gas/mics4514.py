@@ -30,12 +30,12 @@ class MICS4514:
 
     def volt_RED(self):
         value = self.adc.read(ADC_RATE, RED_SENSOR_CH)
-        volts = (value * 3.3) / 32768 # 2^16, max V is 3.3
+        volts = (value * 3.3) / 32768 # 2^15, max V is 3.3
         return volts
 
     def volt_OX(self):
         value = self.adc.read(ADC_RATE, OX_SENSOR_CH)
-        volts = (value * 3.3) / 32768 # 2^16, max V is 3.3
+        volts = (value * 3.3) / 32768 # 2^15, max V is 3.3
         return volts
 
     def read_RED(self):

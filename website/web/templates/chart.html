@@ -38,7 +38,7 @@ max = {{max}}
 var LineChartDemo = new Chart(mychart).Line(barData, {
      scaleOverride: true,
      scaleSteps: steps,
-     scaleStepWidth: Math.ceil(max / steps),
+     scaleStepWidth: max / steps,
      scaleStartValue: {{start}},
      scaleShowVerticalLines: true,
      scaleShowGridLines : true,
@@ -70,19 +70,28 @@ var LineChartDemo = new Chart(mychart).Line(barData, {
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav text-uppercase ml-auto">
         <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#what">Info</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#belief">Belief</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#setup">Setup</a>
+          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#setup">Tech</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#measurements">Measurements</a>
+          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#measurements">Sensors</a>
         </li>
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#graphing">Data</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#mapping">Mapping</a>
+          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#mapping">Maps</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#team">Team</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#contact">Contact</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{url_for('landing.hub')}}">Data Hub</a>
@@ -93,28 +102,56 @@ var LineChartDemo = new Chart(mychart).Line(barData, {
 </nav>
 
 {% endblock nav %}
-{% block pageheader %}
-
+{% block pageheader %}s
 {% endblock pageheader %}
 
 {% block fullPage %}
  
-<h1>Flask Chart.js</h1>
 <!-- bar chart canvas element -->
-<div class="container">
-  <canvas id="chart1" width="1200" height="800"></canvas>
-</div>
-
-<div class="container">
-  <canvas id="chart2" width="1200" height="800"></canvas>
-</div>
+<section class="graphs">
+    <h1>Time series graphs</h1>
+  <div class="row graph_row">
+    <div class="col-md-4">
+      <h2>Temperature (&#176;C)</h2>
+      <canvas id="chart1" width="600" height="400"></canvas>
+    </div>
+    <div class="col-md-4">
+      <h2>Nitrogen Dioxide (ppm)</h2>
+      <canvas id="chart2" width="600" height="400"></canvas>
+    </div>
+    <div class="col-md-4">
+      <h2>Carbon Monoxide (ppm)</h2>
+      <canvas id="chart3" width="600" height="400"></canvas>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-4">
+      <h2>Humidity (%)</h2>
+      <canvas id="chart4" width="600" height="400"></canvas>
+    </div>
+    <div class="col-md-4">
+      <h2>Pressure (Bar)</h2>
+      <canvas id="chart5" width="600" height="400"></canvas>
+    </div>
+    <div class="col-md-2">
+    </div>
+  </div>
+</section>
 <script>
 
 // Change generic parameters in the macro above (and add additional arguments if necessary)
 // make_chart(chartname, data, labels, start_value, step, max)
 {{ make_chart('chart1',temps,times,0,8,32) }}
 
-{{ make_chart('chart2',no2s,times,0,1,600) }}
+{{ make_chart('chart2',no2s,times,0.05,10,0.5) }}
+
+{{ make_chart('chart3',cos,times,0,10,10) }}
+
+{{ make_chart('chart4',hums,times,0,10,100) }}
+
+{{ make_chart('chart5',pres,times,0,10,150) }}
 
 </script>
 

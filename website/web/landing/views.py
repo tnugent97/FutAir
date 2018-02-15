@@ -42,20 +42,20 @@ def generate_fake_json(fname='test.json'):
         #lng = -0.283707 + (float(random.randint(0,50000))/100000.0) # from 51.433696 to 51.567723
         lat = random.gauss(51.4988,0.27)
         lng = random.gauss(-0.1667,0.27)
-        bottom= 51.466503
-        top= 51.520369
-        left= -0.192333
-        right= -0.059810
+        bottom= 51.436503
+        top= 51.560369
+        left= -0.242333
+        right= -0.049810
         if lat < 50.9:
             lat = 51.442687 + (float(random.randint(0,25000))/100000.0)
         
         temp = float(random.randint(500,1700))/100.0
         humidity = float(random.randint(40,80))/100.0
-        CO = random.randint(1,6)
-        NO2 = float(random.randint(320,600))/10.0
+        CO = float(random.randint(1,500))/10.0
+        NO2 = float(random.randint(1,60))/10.0
         if (lat > bottom) and (lat < top) and (lng > left) and (lng < right):
-            CO   += random.randint(1,2)
-            NO2 += random.randint(0,20)  
+            CO  += float(random.randint(0,400))/10.0
+            NO2 += random.randint(0,4)  
         pressure = 99500 + float(random.randint(10,5000))/10.0
         data[i] = {
                     "location":{"lat":lat,"lng":lng},
@@ -103,12 +103,12 @@ def chart(idn=None,meth="mqtt"):
     if idn is not None and idn in data:
         sensor_i = data.get(idn)
         for x in sensor_i:
-            print x["time"]
+            #print x["time"]
             times.append(x["time"])
             temperatures.append(x["temp"])
             no2s.append(x["no2"])
             cos.append(x["co"])
-            pres.append(x["pre"])
+            pres.append(x["pre"]/1000)
             hums.append(x["hum"])
     else:
         temperatures = [23.7, 23.4, 23.8, 23.8, 18.7, 15.2,
@@ -117,12 +117,12 @@ def chart(idn=None,meth="mqtt"):
         times = ["12:00PM", "12:10PM", "12:20PM", "12:30PM", "12:40PM", "12:50PM",
                 "1:00PM", "1:10PM", "1:20PM", "1:30PM", "1:40PM", "1:50PM",
                 "2:00PM", "2:10PM", "2:20PM", "2:30PM", "2:40PM", "2:50PM"]
-    print no2s
+    #print no2s
     return render_template('chart.html', 
                             temps=temperatures[-20:],
                             times=times[-20:],
-                            no2s=cos[-20:],
-                            cos=no2s[-20:],
+                            no2s=no2s[-20:],
+                            cos=cos[-20:],
                             hums=hums[-20:],
                             pres=pres[-20:],
                             legend=legend)        

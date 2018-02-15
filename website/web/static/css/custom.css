@@ -71,6 +71,10 @@
   padding: 80px 0;
 }
 
+.negtitle {
+  margin-top:-25px;
+}
+
 .center {
    display: block;
    margin-left: auto;
@@ -176,6 +180,16 @@
   color: rgb(10, 41, 14);
 }
 
+.futair {
+  font-size: 75px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 75px;
+  margin-bottom: 50px;
+  font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+
 .how_icon h4 {
   text-align: center;
   width: 100%;
@@ -191,6 +205,11 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+.models h2 {
+  margin-top: 0;
+  margin-bottom: 35px;
 }
 
 .trees {
@@ -280,4 +299,13 @@ li::-moz-selection { /* Code for Firefox */
 
 li::selection {
   color: white;  
+}
+
+.graphs {
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.graph_row {
+  margin-bottom: 35px;
 }
