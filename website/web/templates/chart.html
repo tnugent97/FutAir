@@ -38,7 +38,7 @@ max = {{max}}
 var LineChartDemo = new Chart(mychart).Line(barData, {
      scaleOverride: true,
      scaleSteps: steps,
-     scaleStepWidth: Math.ceil(max / steps),
+     scaleStepWidth: max / steps,
      scaleStartValue: {{start}},
      scaleShowVerticalLines: true,
      scaleShowGridLines : true,
@@ -145,7 +145,7 @@ var LineChartDemo = new Chart(mychart).Line(barData, {
 // make_chart(chartname, data, labels, start_value, step, max)
 {{ make_chart('chart1',temps,times,0,8,32) }}
 
-{{ make_chart('chart2',no2s,times,0.05,1,0.5) }}
+{{ make_chart('chart2',no2s,times,0.05,10,0.5) }}
 
 {{ make_chart('chart3',cos,times,200,10,600) }}
 
