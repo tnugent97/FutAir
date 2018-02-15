@@ -1,4 +1,4 @@
-# Embedded
+# FutAir
 
 ## Capabilities
 * Complete power management system for running off battery, and charging the battery using our solar panel.
@@ -29,7 +29,7 @@ This folder contains all of the code that runs on the ESP for the various sensor
 
 ## Renders
 
-Contains renders of our 3D model for 
+Contains renders of our 3D model for case with solar panel.
 
 ## Running files on the ESP
 
