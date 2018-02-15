@@ -1,3 +1,5 @@
+#must call to create the degree symbol on the lcd_d7
+#resets when power is lost
 import time
 from machine import Pin
 import character_lcd
