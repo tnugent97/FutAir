@@ -108,7 +108,7 @@ def chart(idn=None,meth="mqtt"):
             temperatures.append(x["temp"])
             no2s.append(x["no2"])
             cos.append(x["co"])
-            pres.append(x["pre"]/1000)
+            pres.append(x["pre"]/100000)
             hums.append(x["hum"])
     else:
         temperatures = [23.7, 23.4, 23.8, 23.8, 18.7, 15.2,
