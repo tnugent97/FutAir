@@ -71,6 +71,10 @@
   padding: 80px 0;
 }
 
+.negtitle {
+  margin-top:-25px;
+}
+
 .center {
    display: block;
    margin-left: auto;

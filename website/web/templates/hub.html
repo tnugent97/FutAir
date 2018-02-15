@@ -23,19 +23,28 @@
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav text-uppercase ml-auto">
         <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#what">Info</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#belief">Belief</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#setup">Setup</a>
+          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#setup">Tech</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#measurements">Measurements</a>
+          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#measurements">Sensors</a>
         </li>
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#graphing">Data</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#mapping">Mapping</a>
+          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#mapping">Maps</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#team">Team</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="{{url_for('landing.index')}}#contact">Contact</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{url_for('landing.hub')}}">Data Hub</a>
@@ -81,11 +90,12 @@
       var col = "#000000";
       var unit = "";
       if (key == "CO"){
-        col = getCol(value,20,50).colour;
+        col = getCol(value,30,60).colour;
         unit = "<small>ppm</small>"
+        value = precisionRound(value,2)
       }
       if (key == "NO2"){
-        col = getCol(value,55,60).colour;
+        col = getCol(value,5,7).colour;
         unit = " <small>ppm</small>"
       }
       if (key== "temp"){
@@ -110,7 +120,7 @@
   function initMap() {
       var imperial = {lat: 51.4988, lng: -0.1667};
       var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 15,
+        zoom: 13,
         center: imperial
       });
       for (var key in futairs) {
@@ -121,10 +131,10 @@
           //  title: prettyPrint(futair.payload)
           //  //payload: futair.payload
           //});
-          console.log(getCol(futair.payload.NO2,55,60));
-          var circ_col1 = getCol(futair.payload.NO2,55,60);
-          var circ_col2 = getCol(futair.payload.CO,4,6);
-          console.log(getCol(futair.payload.CO,4,6));
+          console.log(getCol(futair.payload.NO2,5,7));
+          var circ_col1 = getCol(futair.payload.NO2,5,7);
+          var circ_col2 = getCol(futair.payload.CO,30,60);
+          console.log(getCol(futair.payload.CO,30,60));
           if (circ_col1.level > circ_col2.level) {
             circle_colour = circ_col1.colour;
           } else {
