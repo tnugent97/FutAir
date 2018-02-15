@@ -10,4 +10,3 @@ python-dateutil
 pytz
 raven
 requests
-psycopg2
